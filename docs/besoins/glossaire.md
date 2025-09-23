@@ -20,4 +20,3 @@ Voici les mots importants pour notre projet et leur signification simple.
 | CSV | Un type de fichier utilisé pour stocker les notes et les résultats des cours. |
 | MkDocs | Un outil qui transforme nos textes en un site web facile à lire. |
 | Material for MkDocs | Un style joli et clair pour le site web créé avec MkDocs. |
-s
