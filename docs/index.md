@@ -10,17 +10,17 @@ title: Vue d'ensemble
     }
 </style>
 
-# Nom du projet
+# OptiCoursUdeM
 
 ## Équipe
 
-- **`M1`:** Membre 1 (matricule) #nom-utilisateur
-- **`M2`:** Membre 2 (matricule) #nom-utilisateur
-- **`M3`:** Membre 3 (matricule) #nom-utilisateur  
-- **`M4`:** Membre 4 (matricule) #nom-utilisateur
+- **`M1`:** Rayen Rizk 20272434 #rayen0217_84117
+- **`M2`:** Pablo Campos Castellanos 20206709 #cmpspablo01
+- **`M3`:** Weibin Liang 20305273 #instanoudle_66563
+- **`M4`:** Zhexin Guo (matricule) #faustg
 
 ## Description du projet
-
+Plateforme web destinée  aux étudiants de l'université de montréal pour les aider à faire le meilleurs choix de cours possible pour leur parcours scolaire. Notre plateforme va combiner des informations officiels sur les cours et aussi des informations (avis et recommandations) reccueillis par les étudiants qui ont déja fait les cours dans le passé. La plateforme permettra de chercher les cours par sigle, de visualiser les prérequis et faire la comparaison de plusieurs cours selon la charge de travail estimée etc et les avis des précédents étudiants. 
 ## Échéancier
 
 | Taches                        | Terminé le    | Statut      | Responsable  |
