@@ -9,6 +9,12 @@ Décrire les flux d’interaction entre les acteurs et le système.
 
 ## Diagrammes
 
+
+
+
+
+
+
 ### Description des flux complexes
 
 ### 🟢 Flux : Ouverture de la plateforme
