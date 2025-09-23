@@ -25,7 +25,7 @@ Lorsque l’étudiant accède à son tableau de cheminement personnel, le systè
 
 ### 🔍 Flux : Recherche de cours
 
-Si jamais l’étudiant veut obtenir un cours à option(par exemple, le cours hors de programme), il peut utiliser la secion de recherche en utilisatn un mot-clé (sigle, nom ou sujet) dans la barre de recherche. Le système interroge l’API Planifium et affiche les cours correspondants, avec un aperçu des évaluations moyennes, de la charge de travail et du taux d’échec. Si aucun résultat n’est trouvé, des mots clés "Rien à trouver" va afficher dans la page.
+Si jamais l’étudiant veut obtenir un cours à option(par exemple, le cours hors de programme), il peut utiliser la secion de recherche en utilisatn un mot-clé (sigle, nom ou sujet) dans la barre de recherche. Le système interroge l’API Planifium et affiche les cours correspondants, avec un aperçu des évaluations moyennes, de la charge de travail et du taux d’échec. Si aucun résultat n’est trouvé, des mots clés "Rien à trouver" va afficher dans la page et puis la barre de recherche apparaît et permet aux étudiants de rechercher à nouvaux.
 
 ---
 
