@@ -76,4 +76,3 @@ Dans ce cas, le système affiche un message d’erreur clair précisant la ou le
 - **Restriction de programme :** une mention explicite indique que ce cours est réservé à certains profils. Une liste d’alternatives similaires est suggérée.
 
 L’objectif est de fournir un accompagnement intelligent et transparent pour permettre à l’étudiant de corriger sa sélection et de finaliser son parcours sans frustration. Si une erreur inconnue se produit, un message de type “Erreur système” s’affiche, avec l’instruction suivante : “Veuillez contacter l’équipe de TGDE pour obtenir de l’aide,” et en indiquant le courrier. 
-```
