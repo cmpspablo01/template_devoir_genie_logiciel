@@ -22,7 +22,7 @@ flowchart TD
     %% Branche 1 : Cours obligatoires
     parallele --> obligatoires[Afficher cours obligatoires]
     obligatoires --> afficheOblig[Afficher : évaluation, charge de travaux, échec]
-    afficheOblig --> clicOblig[Clique pour les détails: déscription du cours, professeur, temps et commentaires des étudiants]
+    afficheOblig --> clicOblig[Clique pour les détails: déscription du cours, professeur, temps et commentaires des étudiants ou vue comparative]
     clicOblig --> choixAjoutOblig{Ajouter ce cours au panier ?}
     choixAjoutOblig -- Oui --> ajoutOblig[Ajout dans le panier]
     choixAjoutOblig -- Non --> retourOblig[Retour à la liste des cours]
@@ -41,7 +41,7 @@ flowchart TD
     apiCall --> resultats{Résultats trouvés ?}
 
     resultats -- Oui --> afficheCours[Afficher : évaluation, charge de travaux, échec]
-    afficheCours --> clicDetails[Clique pour les détails: déscription du cours, professeur, temps et commentaires des étudiants]
+    afficheCours --> clicDetails[Clique pour les détails: déscription du cours, professeur, temps et commentaires des étudiants ou vue comparative]
     clicDetails --> choixAjoutHors{Ajouter ce cours au panier ?}
     choixAjoutHors -- Oui --> ajoutHors[Ajout dans le panier]
     choixAjoutHors -- Non --> retourHors[Retour à la liste des résultats]
@@ -75,7 +75,7 @@ Lorsque l’étudiant accède à son tableau de cheminement personnel, le systè
 
 ### 🔍 Flux : Recherche de cours
 
-Si jamais l’étudiant veut obtenir un cours à option(par exemple, le cours hors de programme), il peut utiliser la secion de recherche en utilisatn un mot-clé (sigle, nom ou sujet) dans la barre de recherche. Le système interroge l’API Planifium et affiche les cours correspondants, avec un aperçu des évaluations moyennes, de la charge de travail et du taux d’échec. Si aucun résultat n’est trouvé, des mots clés "Rien à trouver" va afficher dans la page et puis la barre de recherche apparaît et permet aux étudiants de rechercher à nouvaux.
+Si jamais l’étudiant veut obtenir un cours à option(par exemple, le cours hors de programme), il peut utiliser la secion de recherche en utilisatn un mot-clé (sigle, nom ou sujet) dans la barre de recherche.le système interroge l’API Planifium et affiche les cours correspondants, incluant une évaluation moyenne, la charge de travail, le taux d’échec, une description du cours, le nom du professeur et des commentaires anonymes d’étudiants. Si aucun résultat n’est trouvé, des mots clés "Rien à trouver" va afficher dans la page et puis la barre de recherche apparaît et permet aux étudiants de rechercher à nouvaux.
 
 ---
 
@@ -87,7 +87,7 @@ Si l’étudiant a rempli son profil (préférence pour les cours pratiques, int
 
 ### ⚖️ Flux : Comparaison
 
-L’étudiant peut sélectionner plusieurs cours (ex: IFT2255, IFT2035) et ouvrir une vue comparative. Le système génère un tableau croisé indiquant : charge horaire, moyenne historique, taux d’échec, commentaires représentatifs. En même temps, l’étudiant souhaite éviter les conflits d’horaire entre plusieurs cours. Lorsqu’il sélectionne des cours à comparer, le système interroge l’API Planifium pour récupérer les horaires disponibles (jour, heure, groupe, salle, session). Une vue en calendrier (type Google Agenda) s’affiche, permettant de visualiser les superpositions, les conflits ou les zones libres. L’étudiant peut ainsi ajuster sa sélection. En bas de l’interface de comparaison, des commentaires anonymes provenant d’anciens étudiants sont affichés. Ces commentaires permettent de mieux comprendre le style d’enseignement des professeurs, la difficulté réelle du cours, et d’autres éléments subjectifs.Si plusieurs commentaires affichent un contenu similaire, ils sont regroupés automatiquement pour éviter la redondance. L’étudiant peut cliquer pour les développer individuellement s’il souhaite voir le détail de chaque avis. Cette information qualitative complète les données chiffrées pour aider l’étudiant à faire un choix éclairé selon ses préférences personnelles. 
+L’étudiant peut sélectionner plusieurs cours (ex: IFT2255, IFT2035) et ouvrir une vue comparative. Cette fonctionnalité est accessible à partir de la fiche détaillée d’un cours ou depuis la vue du panier avant la validation finale. Le système génère un tableau croisé indiquant : charge horaire, moyenne historique, taux d’échec, commentaires représentatifs. En même temps, l’étudiant souhaite éviter les conflits d’horaire entre plusieurs cours. Lorsqu’il sélectionne des cours à comparer, le système interroge l’API Planifium pour récupérer les horaires disponibles (jour, heure, groupe, salle, session). Une vue en calendrier (type Google Agenda) s’affiche, permettant de visualiser les superpositions, les conflits ou les zones libres. L’étudiant peut ainsi ajuster sa sélection. En bas de l’interface de comparaison, des commentaires anonymes provenant d’anciens étudiants sont affichés. Ces commentaires permettent de mieux comprendre le style d’enseignement des professeurs, la difficulté réelle du cours, et d’autres éléments subjectifs.Si plusieurs commentaires affichent un contenu similaire, ils sont regroupés automatiquement pour éviter la redondance. L’étudiant peut cliquer pour les développer individuellement s’il souhaite voir le détail de chaque avis. Cette information qualitative complète les données chiffrées pour aider l’étudiant à faire un choix éclairé selon ses préférences personnelles. 
 
 ---
 
