@@ -8,10 +8,50 @@ title: Analyse des besoins - Flux principaux
 Décrire les flux d’interaction entre les acteurs et le système.
 
 ## Diagrammes
+### 🔍 Flux d'activité : Recherche de cours
 
+Voici le diagramme d'activité UML représentant le processus de recherche de cours :
 
+```mermaid
+flowchart TD
+    start(Début) --> auth[Authentification de l'étudiant]
+    auth --> detectProg[Détection automatique du programme]
+    detectProg --> recommandation[Recommandation personnalisée selon le profil]
+    recommandation --> parallele{"Choix de parcours"}
 
+    %% Branche 1 : Cours obligatoires
+    parallele --> obligatoires[Afficher cours obligatoires]
+    obligatoires --> afficheOblig[Afficher : évaluation, charge de travaux, échec]
+    afficheOblig --> clicOblig[Clique pour les détails: déscription du cours, professeur, temps et commentaires des étudiants]
+    clicOblig --> choixAjoutOblig{Ajouter ce cours au panier ?}
+    choixAjoutOblig -- Oui --> ajoutOblig[Ajout dans le panier]
+    choixAjoutOblig -- Non --> retourOblig[Retour à la liste des cours]
+    retourOblig --> afficheOblig
+    ajoutOblig --> verifOblig{Sélection réussie ?}
+    verifOblig -- Oui --> fin1(Fin - sélection réussie)
+    verifOblig -- Non --> echec1["Échec de la sélection"]
+    echec1 --> msgErreur1["Afficher erreur (complet, conflit, etc.)"]
+    msgErreur1 --> retourOblig[Retour à l’affichage des cours obligatoires]
+    
 
+    %% Branche 2 : Recherche de cours hors programme
+    parallele --> recherche[Recherche de cours hors programme]
+    recherche --> entreeMotCle[Entrer un mot-clé - sigle ou nom]
+    entreeMotCle --> apiCall[Appel à l'API Planifium]
+    apiCall --> resultats{Résultats trouvés ?}
+
+    resultats -- Oui --> afficheCours[Afficher : évaluation, charge de travaux, échec]
+    afficheCours --> clicDetails[Clique pour les détails: déscription du cours, professeur, temps et commentaires des étudiants]
+    clicDetails --> choixAjoutHors{Ajouter ce cours au panier ?}
+    choixAjoutHors -- Oui --> ajoutHors[Ajout dans le panier]
+    choixAjoutHors -- Non --> retourHors[Retour à la liste des résultats]
+    retourHors --> afficheCours
+    ajoutHors --> fin2(Fin - sélection réussie)
+
+    resultats -- Non --> rienTrouve["Aucun résultat"]
+    rienTrouve --> nouvelleRecherche[Recommencer la recherche]
+    nouvelleRecherche --> entreeMotCle
+```
 
 
 
@@ -25,7 +65,7 @@ L'étudiant fait le choix de cours et entre dans la palteforme. Le système redi
 
 ### 🧾 Flux : Affichage des cours obligatoires
 
-Lorsque l’étudiant accède à son tableau de cheminement personnel, le système identifie automatiquement son programme d’études (ex. Baccalauréat en informatique) grâce à l’authentification. Ensuite, il interroge une base de données institutionnelle (API interne ou fichier de règles) pour récupérer la liste des cours obligatoires et des préalables requis. Ces cours sont affichés avec un indicateur visuel (ex. couleur ou icône) pour distinguer leur statut (obligatoire, option, déjà complété). L’étudiant peut ensuite filtrer ou trier cette liste pour planifier ses futures sessions plus efficacement. Ces données sont sauvegardées dans le profil de l’étudiant pour un accès rapide.
+Lorsque l’étudiant accède à son tableau de cheminement personnel, le système identifie automatiquement son programme d’études (ex. Baccalauréat en informatique) grâce à l’authentification. Ensuite, il interroge une base de données institutionelle ou un fichier de règles programmé (ex. table de correspondance programme → cours obligatoires), indépendamment de l’API Planifium, pour récupérer la liste des cours obligatoires et des préalables requis. Ces cours sont affichés avec un indicateur visuel (ex. couleur ou icône) pour distinguer leur statut (obligatoire, déjà complété). L’étudiant peut ensuite filtrer ou trier cette liste pour planifier ses futures sessions plus efficacement. Ces données sont sauvegardées dans le profil de l’étudiant pour un accès rapide.
 
 ---
 
@@ -47,20 +87,6 @@ L’étudiant peut sélectionner plusieurs cours (ex: IFT2255, IFT2035) et ouvri
 
 ---
 
-### 📤 Flux : Sélection finale
-
-Après avoir consulté les comparaisons et les horaires, l’étudiant souhaite finaliser ses choix de cours pour une session donnée. Il clique sur le bouton “Valider ma sélection”.
-
-Le système vérifie la cohérence de la combinaison (préalables respectés, absence de conflits horaires) et propose ensuite plusieurs actions :
-- Exporter la grille finale en format PDF (incluant nom du cours, horaire, charge estimée)
-- Synchroniser les horaires validés avec son compte Google Agenda
-- Ajouter un tag “à surveiller” pour les cours d’intérêt (ce qui active des notifications si une place se libère ou si un avis est ajouté)
-
-Cette étape conclut le parcours de sélection, et prépare l’étudiant à passer à l’inscription officielle ou à sauvegarder ses choix pour consultation ultérieure.
-
----
-
- 
 ### ❌ Flux : Échec de la sélection de cours
 
 Il peut arriver que l’étudiant rencontre un échec lors de la tentative de validation de sa sélection de cours. Cela peut être dû à plusieurs raisons :
@@ -76,3 +102,20 @@ Dans ce cas, le système affiche un message d’erreur clair précisant la ou le
 - **Restriction de programme :** une mention explicite indique que ce cours est réservé à certains profils. Une liste d’alternatives similaires est suggérée.
 
 L’objectif est de fournir un accompagnement intelligent et transparent pour permettre à l’étudiant de corriger sa sélection et de finaliser son parcours sans frustration. Si une erreur inconnue se produit, un message de type “Erreur système” s’affiche, avec l’instruction suivante : “Veuillez contacter l’équipe de TGDE pour obtenir de l’aide,” et en indiquant le courrier. 
+
+---
+
+### 📤 Flux : Sélection finale
+
+Après avoir consulté les comparaisons et les horaires, l’étudiant souhaite finaliser ses choix de cours pour une session donnée. Il clique sur le bouton “Valider ma sélection”.
+
+Le système vérifie la cohérence de la combinaison (préalables respectés, absence de conflits horaires) et propose ensuite plusieurs actions :
+- Exporter la grille finale en format PDF (incluant nom du cours, horaire, charge estimée)
+- Synchroniser les horaires validés avec son compte Google Agenda
+- Ajouter un tag “à surveiller” pour les cours d’intérêt (ce qui active des notifications si une place se libère ou si un avis est ajouté)
+
+Cette étape conclut le parcours de sélection, et prépare l’étudiant à passer à l’inscription officielle ou à sauvegarder ses choix pour consultation ultérieure.
+
+---
+
+
