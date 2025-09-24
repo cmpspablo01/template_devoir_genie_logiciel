@@ -46,7 +46,11 @@ flowchart TD
     choixAjoutHors -- Oui --> ajoutHors[Ajout dans le panier]
     choixAjoutHors -- Non --> retourHors[Retour à la liste des résultats]
     retourHors --> afficheCours
-    ajoutHors --> fin2(Fin - sélection réussie)
+    ajoutHors --> verifHors{Sélection réussie ?}
+    verifHors -- Oui --> fin2(Fin - sélection réussie)
+    verifHors -- Non --> echec2["Échec de la sélection"]
+    echec2 --> msgErreur2["Afficher erreur (complet, conflit, etc.)"]
+    msgErreur2 --> retourHors[Retour à la recherche]
 
     resultats -- Non --> rienTrouve["Aucun résultat"]
     rienTrouve --> nouvelleRecherche[Recommencer la recherche]
