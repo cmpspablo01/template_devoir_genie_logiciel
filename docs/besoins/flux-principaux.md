@@ -8,7 +8,7 @@ title: Analyse des besoins - Flux principaux
 Décrire les flux d’interaction entre les acteurs et le système.
 
 ## Diagrammes
-### 🔍 Flux d'activité : Recherche de cours
+### Flux d'activité : Recherche de cours
 
 Voici le diagramme d'activité UML représentant le processus de recherche de cours :
 
