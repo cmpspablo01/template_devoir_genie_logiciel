@@ -61,37 +61,37 @@ flowchart TD
 
 ### Description des flux complexes
 
-### 🟢 Flux : Ouverture de la plateforme
+### Flux : Ouverture de la plateforme
 
 L'étudiant fait le choix de cours et entre dans la palteforme. Le système redirige l’étudiant vers la page d’accueil personnalisée.
 
 ---
 
-### 🧾 Flux : Affichage des cours obligatoires
+### Flux : Affichage des cours obligatoires
 
 Lorsque l’étudiant accède à son tableau de cheminement personnel, le système identifie automatiquement son programme d’études (ex. Baccalauréat en informatique) grâce à l’authentification. Ensuite, il interroge une base de données institutionelle ou un fichier de règles programmé (ex. table de correspondance programme → cours obligatoires), indépendamment de l’API Planifium, pour récupérer la liste des cours obligatoires et des préalables requis. Ces cours sont affichés avec un indicateur visuel (ex. couleur ou icône) pour distinguer leur statut (obligatoire, déjà complété). L’étudiant peut ensuite filtrer ou trier cette liste pour planifier ses futures sessions plus efficacement. Ces données sont sauvegardées dans le profil de l’étudiant pour un accès rapide.
 
 ---
 
-### 🔍 Flux : Recherche de cours
+### Flux : Recherche de cours
 
 Si jamais l’étudiant veut obtenir un cours à option(par exemple, le cours hors de programme), il peut utiliser la secion de recherche en utilisatn un mot-clé (sigle, nom ou sujet) dans la barre de recherche.le système interroge l’API Planifium et affiche les cours correspondants, incluant une évaluation moyenne, la charge de travail, le taux d’échec, une description du cours, le nom du professeur et des commentaires anonymes d’étudiants. Si aucun résultat n’est trouvé, des mots clés "Rien à trouver" va afficher dans la page et puis la barre de recherche apparaît et permet aux étudiants de rechercher à nouvaux.
 
 ---
 
-### 🧠 Flux : Personnalisation
+### Flux : Personnalisation
 
 Si l’étudiant a rempli son profil (préférence pour les cours pratiques, intérêt en IA, etc.), le système classe les résultats de recherche en fonction de ces préférences, grâce à un module de recommandation. Le système affiche le nom du cours sur l’interface. Lorsqu’un étudiant est intéressé, il peut cliquer pour consulter les détails. Ce mécanisme d’interaction simple et intuitif facilite l’identification rapide des cours pertinents selon les préférences individuelles. Le module apprend des interactions passées pour améliorer les recommandations.
 
 ---
 
-### ⚖️ Flux : Comparaison
+### Flux : Comparaison
 
 L’étudiant peut sélectionner plusieurs cours (ex: IFT2255, IFT2035) et ouvrir une vue comparative. Cette fonctionnalité est accessible à partir de la fiche détaillée d’un cours ou depuis la vue du panier avant la validation finale. Le système génère un tableau croisé indiquant : charge horaire, moyenne historique, taux d’échec, commentaires représentatifs. En même temps, l’étudiant souhaite éviter les conflits d’horaire entre plusieurs cours. Lorsqu’il sélectionne des cours à comparer, le système interroge l’API Planifium pour récupérer les horaires disponibles (jour, heure, groupe, salle, session). Une vue en calendrier (type Google Agenda) s’affiche, permettant de visualiser les superpositions, les conflits ou les zones libres. L’étudiant peut ainsi ajuster sa sélection. En bas de l’interface de comparaison, des commentaires anonymes provenant d’anciens étudiants sont affichés. Ces commentaires permettent de mieux comprendre le style d’enseignement des professeurs, la difficulté réelle du cours, et d’autres éléments subjectifs.Si plusieurs commentaires affichent un contenu similaire, ils sont regroupés automatiquement pour éviter la redondance. L’étudiant peut cliquer pour les développer individuellement s’il souhaite voir le détail de chaque avis. Cette information qualitative complète les données chiffrées pour aider l’étudiant à faire un choix éclairé selon ses préférences personnelles. 
 
 ---
 
-### ❌ Flux : Échec de la sélection de cours
+### Flux : Échec de la sélection de cours
 
 Il peut arriver que l’étudiant rencontre un échec lors de la tentative de validation de sa sélection de cours. Cela peut être dû à plusieurs raisons :
 - Un ou plusieurs cours choisis ont des préalables non complétés ;
@@ -109,7 +109,7 @@ L’objectif est de fournir un accompagnement intelligent et transparent pour pe
 
 ---
 
-### 📤 Flux : Sélection finale
+### Flux : Sélection finale
 
 Après avoir consulté les comparaisons et les horaires, l’étudiant souhaite finaliser ses choix de cours pour une session donnée. Il clique sur le bouton “Valider ma sélection”.
 
