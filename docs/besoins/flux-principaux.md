@@ -21,18 +21,10 @@ flowchart TD
 
     %% Branche 1 : Cours obligatoires
     parallele --> obligatoires[Afficher cours obligatoires]
-    obligatoires --> afficheOblig[Afficher : évaluation, charge de travaux, échec]
-    afficheOblig --> clicOblig[Clique pour les détails: déscription du cours, professeur, temps et commentaires des étudiants ou vue comparative]
-    clicOblig --> choixAjoutOblig{Ajouter ce cours au panier ?}
-    choixAjoutOblig -- Oui --> ajoutOblig[Ajout dans le panier]
-    choixAjoutOblig -- Non --> retourOblig[Retour à la liste des cours]
-    retourOblig --> afficheOblig
-    ajoutOblig --> verifOblig{Sélection réussie ?}
-    verifOblig -- Oui --> fin1(Fin - sélection réussie)
-    verifOblig -- Non --> echec1["Échec de la sélection"]
-    echec1 --> msgErreur1["Afficher erreur (complet, conflit, etc.)"]
-    msgErreur1 --> retourOblig[Retour à l’affichage des cours obligatoires]
-    
+    obligatoires --> afficheOblig[Afficher : description, nom de proffeur, horaire, commentaires]
+    afficheOblig --> clicOblig[Clique pour voir les détails : évaluation, charge de travaux, taux d’échec]
+    clicOblig --> compareOblig[Comparer avec d'autres cours similaires]
+    compareOblig --> vueComparative1[Vue comparative : charge, échec, évaluation, commentaires]
 
     %% Branche 2 : Recherche de cours hors programme
     parallele --> recherche[Recherche de cours hors programme]
@@ -40,17 +32,10 @@ flowchart TD
     entreeMotCle --> apiCall[Appel à l'API Planifium]
     apiCall --> resultats{Résultats trouvés ?}
 
-    resultats -- Oui --> afficheCours[Afficher : évaluation, charge de travaux, échec]
-    afficheCours --> clicDetails[Clique pour les détails: déscription du cours, professeur, temps et commentaires des étudiants ou vue comparative]
-    clicDetails --> choixAjoutHors{Ajouter ce cours au panier ?}
-    choixAjoutHors -- Oui --> ajoutHors[Ajout dans le panier]
-    choixAjoutHors -- Non --> retourHors[Retour à la liste des résultats]
-    retourHors --> afficheCours
-    ajoutHors --> verifHors{Sélection réussie ?}
-    verifHors -- Oui --> fin2(Fin - sélection réussie)
-    verifHors -- Non --> echec2["Échec de la sélection"]
-    echec2 --> msgErreur2["Afficher erreur (complet, conflit, etc.)"]
-    msgErreur2 --> retourHors[Retour à la recherche]
+    resultats -- Oui --> afficheCours[Afficher : description, nom de proffeur, horaire, commentaires]
+    afficheCours --> clicDetails[Clique pour voir les détails : évaluation, charge de travaux, taux d’échec]
+    clicDetails --> compareHors[Comparer avec d'autres cours similaires]
+    compareHors --> vueComparative2[Vue comparative : charge, échec, évaluation, commentaires]
 
     resultats -- Non --> rienTrouve["Aucun résultat"]
     rienTrouve --> nouvelleRecherche[Recommencer la recherche]
