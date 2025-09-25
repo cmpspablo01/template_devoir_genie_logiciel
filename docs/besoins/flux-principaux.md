@@ -79,7 +79,7 @@ L’étudiant peut sélectionner plusieurs cours (ex: IFT2255, IFT2035) et accé
 
 ### Flux : Échec de la sélection de cours
 
-Si un cours ne peut pas être ajouté en raison de conflits d'horaire, de cours complet, ou de préalables manquants, le système affiche un message d'erreur clair, accompagné de suggestions adapatées (ex: autres groupes disponibles, alternatives similaires, ou lien vers les préalables. L'étudiant est ensuite redirigé vers la page précédente pour ajuster la sélection.
+Si un cours ne peut pas être ajouté en raison de conflits d'horaire, de cours complet, ou de préalables manquants, le système affiche un message d'erreur clair, accompagné de suggestions adapatées (ex: autres groupes disponibles, alternatives similaires, ou lien vers les préalables). L'étudiant est ensuite redirigé vers la page précédente pour ajuster la sélection.
 
 ---
 
