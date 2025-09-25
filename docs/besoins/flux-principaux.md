@@ -12,35 +12,7 @@ Décrire les flux d’interaction entre les acteurs et le système.
 
 Voici le diagramme d'activité UML représentant le processus de recherche de cours :
 
-```mermaid
-flowchart TD
-    start(Début) --> auth[Authentification de l'étudiant]
-    auth --> detectProg[Détection automatique du programme]
-    detectProg --> recommandation[Recommandation personnalisée selon le profil]
-    recommandation --> parallele{"Choix de parcours"}
-
-    %% Branche 1 : Cours obligatoires
-    parallele --> obligatoires[Afficher cours obligatoires]
-    obligatoires --> afficheOblig[Afficher : description, nom de proffeur, horaire, commentaires]
-    afficheOblig --> clicOblig[Clique pour voir les détails : évaluation, charge de travaux, taux d’échec]
-    clicOblig --> compareOblig[Comparer avec d'autres cours similaires]
-    compareOblig --> vueComparative1[Vue comparative : charge, échec, évaluation, commentaires]
-
-    %% Branche 2 : Recherche de cours hors programme
-    parallele --> recherche[Recherche de cours hors programme]
-    recherche --> entreeMotCle[Entrer un mot-clé - sigle ou nom]
-    entreeMotCle --> apiCall[Appel à l'API Planifium]
-    apiCall --> resultats{Résultats trouvés ?}
-
-    resultats -- Oui --> afficheCours[Afficher : description, nom de proffeur, horaire, commentaires]
-    afficheCours --> clicDetails[Clique pour voir les détails : évaluation, charge de travaux, taux d’échec]
-    clicDetails --> compareHors[Comparer avec d'autres cours similaires]
-    compareHors --> vueComparative2[Vue comparative : charge, échec, évaluation, commentaires]
-
-    resultats -- Non --> rienTrouve["Aucun résultat"]
-    rienTrouve --> nouvelleRecherche[Recommencer la recherche]
-    nouvelleRecherche --> entreeMotCle
-```
+![Diagramme de recherche de cours](.../diagramme_recherche_cours.png)
 
 
 
