@@ -37,6 +37,12 @@ title: Analyse des besoins - Exigences
     - Bloc “Résultats académiques” visible si données présentes.
     - Si aucune donnée n’est disponible, un message explicite s’affiche.
 
+- [ ] **EF6 – Authentification et rôle admin**
+  - Description : Connexion avec un profil valide d'étudiant; on peut se connecter avec le rôle Admin pour l’import.
+  - Critères d’acceptation :
+    - Étudiant : profil et préférences enregistrés.
+    - Admin : accès à l’import CSV pour les résultas agrégés des cours.
+
 ---
 
 ## Exigences non fonctionnelles
@@ -75,7 +81,6 @@ title: Analyse des besoins - Exigences
 
 | Type d’utilisateur      | Description                               | Exemples de fonctionnalités accessibles |
 |--------------------------|-------------------------------------------|------------------------------------------|
-| Étudiant invité          | Consultation simple sans profil           | Recherche de cours, voir fiche de base   |
 | Étudiant authentifié     | Profil personnel enregistré               | Personnalisation, comparaison, avis      |
 | Administrateur           | Gestion avancée (Phase 1 limitée à l’import) | Import CSV, validation des avis, configuration |
 <!-- TODO: Détailler selon le périmètre du projet. -->
