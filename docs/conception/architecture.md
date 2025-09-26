@@ -9,9 +9,9 @@ title: Conception - Architecture
 Le système adopte une architecture **client-serveur** avec une séparation claire entre **frontend** et **backend**.  
 - **Type** : Architecture basée sur une **API REST**.  
 - **Raisons du choix** :  
-  - Simplicité de mise en œuvre et de maintenance.  
-  - Intégration facile avec des services externes (API Planifium, Bot Discord).  
-  - Extensible vers une application mobile future.  
+  - Simple à mettre en place et à maintenir.  
+  - Intégration facile avec des services externes (API Planifium, Bot Discord)  
+  - Au besoin on pourra étendre le service sur mobile facilement 
 
 ---
 
@@ -19,15 +19,15 @@ Le système adopte une architecture **client-serveur** avec une séparation clai
 
 - **Frontend Web** :  
   - Interface utilisateur (tableaux de bord, recherche de cours, comparaison).  
-  - Communication avec le backend via des appels HTTP (REST).  
+  - Communication avec le backend via des appels HTTP avec l'API REST.  
 
 - **Backend / API REST** :  
-  - Logique métier (gestion des cours, comparaison, personnalisation).  
+  - S'occupe de toute la logique derrière la gestion des cours, comparaison, personnalisation du profil.  
   - Centralise les données provenant de Planifium, Discord et la base interne.  
 
 - **Base de données** :  
   - Stockage des résultats académiques et des avis étudiants.  
-  - Gestion des profils utilisateurs.  
+  - S'occupe aussi du stockage et de la gestion des profils utilisateurs.  
 
 - **Modules spécialisés** :  
   - Authentification (connexion, gestion des comptes).  
@@ -57,11 +57,22 @@ Le système adopte une architecture **client-serveur** avec une séparation clai
 - **Interactions principales** :  
   - Étudiant ↔ Plateforme (recherche, comparaison, personnalisation).  
   - Plateforme ↔ API Planifium (informations officielles).  
-  - Plateforme ↔ Bot Discord (avis étudiants).  
+  - Plateforme ↔ Bot Discord (avis étudiants).
+
+![Diagramme C4 Niveau 1](modelC4_niveau1.png)
+
+    
 
 ### Niveau 2 – Vue des conteneurs
 - **Frontend Web** (navigateur étudiant).  
-- **Backend / API REST** (logique métier et orchestration).  
-- **Base de données interne** (profils, avis, résultats).  
-- **API externes** : Planifium et Bot Discord.  
+- **Backend / API REST** (logique métier et orchestration) 
+- **Base de données interne** (profils, avis, résultats) 
+- **API externes** : Planifium.
+- **Bot externe** : Bot Discord (envoi les avis des étudiants)
+- **Fichier CSV** : Fichier contenant les résultats agrégés.
+
+
+
+![Diagramme C4 Niveau 2](modelC4_niveau2.png)
+
 
