@@ -19,8 +19,7 @@ Le système proposé est une plateforme web visant à aider les étudiants de l�
 Elle centralise les informations officielles (Planifium, résultats académiques agrégés) et non officielles (avis étudiants via Discord).  
 L’étudiant peut rechercher un cours, vérifier son admissibilité (prérequis, cycle, etc.), consulter un tableau de bord du cours (résultats + avis), comparer plusieurs cours pour estimer la charge de travail, et personnaliser l’affichage selon son profil.
 
-### Acteurs
-- **Étudiant invité** : peut consulter les cours et leurs informations de base.  
+### Acteurs  
 - **Étudiant authentifié** : peut configurer son profil, comparer des cours, et consulter les avis agrégés.  
 - **Administrateur** : gère l’ingestion des données (CSV, Discord, Planifium) et la validation minimale des avis.  
 - **Systèmes externes** :  
