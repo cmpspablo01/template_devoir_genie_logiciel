@@ -15,7 +15,6 @@ Voici le diagramme d'activité UML représentant le processus de recherche de co
 ![Diagramme de recherche de cours](Diagramme_activité.png)
 
 
-
 ### Description des flux complexes
 
 ### Flux : Ouverture de la plateforme
