@@ -12,7 +12,7 @@ Décrire les flux d’interaction entre les acteurs et le système.
 
 Voici le diagramme d'activité UML représentant le processus de recherche de cours :
 
-![Diagramme de recherche de cours](diagramme_recherche_cours.png)
+![Diagramme de recherche de cours](Diagramme_activité.png)
 
 
 
