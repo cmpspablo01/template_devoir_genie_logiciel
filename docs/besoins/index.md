@@ -8,14 +8,14 @@ title: Analyse des besoins - Présentation générale
 Les besoins ont été identifiés à partir :
 
 - de l’énoncé officiel du projet fourni par l’enseignant ;
-- de l’analyse de la liste des souhaits (fournie comme base de départ) ;
+- de l’analyse de la liste des souhaits fournie comme base de départ ;
 - de discussions internes dans l’équipe (brainstorming) ;
 - d’une revue des sources de données disponibles (Planifium API, fichiers CSV de résultats académiques, avis Discord).
 
 ## Description du domaine
 
 ### Fonctionnement
-Le système proposé est une plateforme web visant à aider les étudiants de l’Université de Montréal à prendre des décisions éclairées lors du choix de cours.  
+Le système proposé est une plateforme web visant à aider les étudiants de l’Université de Montréal à prendre les meilleures décisions possibles lors du choix de leurs cours.  
 Elle centralise les informations officielles (Planifium, résultats académiques agrégés) et non officielles (avis étudiants via Discord).  
 L’étudiant peut rechercher un cours, vérifier son admissibilité (prérequis, cycle, etc.), consulter un tableau de bord du cours (résultats + avis), comparer plusieurs cours pour estimer la charge de travail, et personnaliser l’affichage selon son profil.
 
@@ -36,12 +36,12 @@ L’étudiant peut rechercher un cours, vérifier son admissibilité (prérequis
 ## Hypothèses et contraintes
 
 ### Hypothèses
-- Les avis étudiants sont collectés uniquement via un bot Discord.  
+- Les avis étudiants sont collectés uniquement avec un bot Discord.  
 - Les avis ne sont affichés que si n ≥ 5.  
 - Les résultats académiques sont fournis sous format CSV agrégé.  
 - Pour la Phase 1, toutes les données externes sont simulées par des fichiers statiques.  
 
 ### Contraintes
-- Respect de l’échéancier (Phase 1 à livrer le 28 Sep).  
-- Pas d’implémentation finale ni d’optimisation de performance en Phase 1.  
+- Respect de l’échéancier : vérification a faire avec le responsable de l'équipe le 28 septembre et remise du devoir le 10 octobre.  
+- Pas d’implémentation finale ni d’optimisation de performance en Phase 1 
 - Le système reste un prototype documentaire et conceptuel à cette étape.

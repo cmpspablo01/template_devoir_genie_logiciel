@@ -13,16 +13,16 @@ title: Analyse des besoins - Exigences
     - Si un cours contient < 5 avis, aucun avis n’est affiché et un message “Pas assez d’avis” apparaît.
 
 - [ ] **EF2 – Personnalisation du profil étudiant**
-  - Description : L’étudiant peut indiquer ses préférences (ex. théorie/pratique, centres d’intérêt).
+  - Description : L’étudiant peut indiquer ses préférences (ex théorie/pratique et ses centres d’intérêts).
   - Critères d’acceptation :
     - Un formulaire permet de saisir et enregistrer au moins 3 préférences.
     - Les résultats de recherche sont réordonnés selon ces préférences.
     - L’étudiant peut réinitialiser son profil à tout moment.
 
 - [ ] **EF3 – Recherche de cours et éligibilité**
-  - Description : L’étudiant peut rechercher un cours (par code, titre ou mot-clé) et voit clairement son éligibilité (prérequis, co-requis, cycle, contraintes de programme/statut).
+  - Description : L’étudiant peut rechercher un cours par code, titre du cours ou mot-clé et voir son éligibilité (prérequis, cycle, contraintes de programme).
   - Critères d’acceptation :
-    - Recherche “IFT2015” retourne la fiche du cours.
+    - Recherche de “IFT2015” retourne la fiche du cours.
     - Chaque résultat inclut un badge “Éligible / Non éligible / Incomplet”.
 
 - [ ] **EF4 – Comparaison multi-cours**
@@ -38,10 +38,10 @@ title: Analyse des besoins - Exigences
     - Si aucune donnée n’est disponible, un message explicite s’affiche.
 
 - [ ] **EF6 – Authentification et rôle admin**
-  - Description : Connexion avec un profil valide d'étudiant; on peut se connecter avec le rôle Admin pour l’import.
+  - Description : Connexion avec un profil valide d'étudiant; on peut se connecter avec le rôle Admin pour l’import des csv.
   - Critères d’acceptation :
     - Étudiant : profil et préférences enregistrés.
-    - Admin : accès à l’import CSV pour les résultas agrégés des cours.
+    - Admin : accès à l’import csv pour les résultas agrégés des cours.
 
 ---
 
@@ -83,7 +83,7 @@ title: Analyse des besoins - Exigences
 |--------------------------|-------------------------------------------|------------------------------------------|
 | Étudiant authentifié     | Profil personnel enregistré               | Personnalisation, comparaison, avis      |
 | Administrateur           | Gestion avancée (Phase 1 limitée à l’import) | Import CSV, validation des avis, configuration |
-<!-- TODO: Détailler selon le périmètre du projet. -->
+
 
 
 ## Infrastructures

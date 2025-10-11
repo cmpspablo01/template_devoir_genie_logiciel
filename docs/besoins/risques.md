@@ -10,41 +10,41 @@ title: Analyse des besoins - Risques
 - **Probabilité** : Élevée  
 - **Impact** : Moyen  
 - **Plan de mitigation** :  
-  - Désigner un responsable pour l’installation et la configuration initiale  
-  - Partager un guide interne d’utilisation des outils  
-  - Prévoir du temps tampon pour résoudre les problèmes techniques en amont  
+  - Désigner un responsable pour l’installation et la configuration initiale du template et création d'un git  
+  - Nous guider entre nous et créer un guide d’utilisation des outils si nécessaire
+  - Prévoir du temps pour résoudre les problèmes techniques si il y en a 
 
 ### Risque 2 – Difficultés d’intégration avec l’API Planifium ou le bot Discord
 - **Probabilité** : Moyenne  
 - **Impact** : Élevé  
 - **Plan de mitigation** :  
-  - Utiliser des données simulées (CSV/JSON) pour la Phase 1  
-  - Reporter l’intégration réelle à la Phase 2  
-  - Prévoir un processus alternatif d’import manuel des données  
+  - On utilise des données simulées de CSV/JSON pour la Phase 1  
+  - On reporte l’intégration réelle à la Phase 2  
+
 
 ### Risque 3 – Biais ou manipulation des avis étudiants
 - **Probabilité** : Moyenne  
 - **Impact** : Élevé  
 - **Plan de mitigation** :  
   - N’afficher les avis qu’à partir de n≥5  
-  - Détection et filtrage des doublons  
-  - Modération manuelle des cas extrêmes  
+  - Détection et filtrage de doublons 
+  - Si nécessaire on aura des mods qui feront la gestion manuelle des cas extrêmes (ex : effacer un commentaire ou review violent ou inutile) 
 
-### Risque 4 – Sous-estimation de la charge de travail étudiante
+### Risque 4 – Sous-estimatimer la charge de travail 
 - **Probabilité** : Moyenne  
 - **Impact** : Moyen  
 - **Plan de mitigation** :  
-  - Comparaison multi-cours avec estimation d’heures/semaine  
+  - On compare nos cours et horraires pour bien nous organiser en équipe
   - Documentation claire des critères d’estimation  
-  - Mise à jour continue selon les retours des étudiants  
+  - On se fait des mise à jour de façon constante pour savoir on est rendu ou 
 
 ### Risque 5 – Disponibilité limitée des membres de l’équipe
 - **Probabilité** : Moyenne  
 - **Impact** : Moyen  
 - **Plan de mitigation** :  
-  - Répartition claire des tâches  
+  - On fait une répartition claire des tâches  
   - Suivi hebdomadaire de l’avancement  
-  - Documentation commune pour faciliter la reprise par un autre membre  
+
 
 ## Modification du processus opérationnel
 
