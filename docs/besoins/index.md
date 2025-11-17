@@ -14,18 +14,29 @@ Les besoins ont été identifiés à partir :
 
 ## Description du domaine
 
-### Fonctionnement
-Le système proposé est une plateforme web visant à aider les étudiants de l’Université de Montréal à prendre les meilleures décisions possibles lors du choix de leurs cours.  
-Elle centralise les informations officielles (Planifium, résultats académiques agrégés) et non officielles (avis étudiants via Discord).  
-L’étudiant peut rechercher un cours, vérifier son admissibilité (prérequis, cycle, etc.), consulter un tableau de bord du cours (résultats + avis), comparer plusieurs cours pour estimer la charge de travail, et personnaliser l’affichage selon son profil.
+### Fonctionnement actuel avant notre application
+
+Le domaine étudié est celui du **choix de cours des étudiants de l'Université de Montréal**, plus particulièrement au DIRO. Avant notre système, un étudiant doit combiner plusieurs outils et sources pour planifier sa session, comprendre les contraintes de son programme et estimer la charge de travail. Voici une description simplifiée du processus actuel :
+
+- L'étudiant consulte les outils fournies par l’UdeM (centre étudiant, catalogue de cours, fiches de programme) pour identifier les cours disponibles à la prochaine session.
+- Il identifie les cours qu'il doit suivre parmi les cours obligatoires, les cours à option et les cours hors programme, en tenant compte des blocs de son cheminement qu'il n'a pas complété.
+- Il vérifie les prérequis, les corequis, les cycles et les horaires des cours pour lesquels il est admissible.
+- Il consulte l’horaire d’un cours et le personnel enseignant qui donne le cours, mais pour obtenir des informations sur la charge de travail, la difficulté ou la qualité de l’enseignement, il doit utiliser des outils externes telles que les serveurs Discord de son programme, les discussions avec d’autres étudiants, ou des sites comme RateMyProfessor.
+- Lorsque disponibles, il tente de trouver les **résultats académiques agrégés** afin d’estimer la performance historique des cohortes dans ce cours.
+- Il construit un horaire sans conflits et essaie d’équilibrer sa charge de travail en fonction de ses contraintes personnelles et des exigences des cours.
+- Au besoin, il contacte les **TGDE** pour valider son admissibilité, clarifier des règles de programme ou planifier son cheminement.
+
 
 ### Acteurs  
-- **Étudiant authentifié** : peut configurer son profil, comparer des cours, et consulter les avis agrégés.  
-- **Administrateur** : gère l’ingestion des données (CSV, Discord, Planifium) et la validation minimale des avis.  
-- **Systèmes externes** :  
-  - *Planifium API* (catalogue officiel des cours et horaires)  
-  - *Fichiers CSV* (résultats académiques agrégés)  
-  - *Bot Discord* (collecte des avis étudiants)
+- **Étudiants de l'Université de Montréal** : 
+Personnes qui doivent choisir leurs cours à chaque session en tenant compte des exigences de leur programme, des conflits d'horaire, des prérequis et de la charge de travail. 
+- **TGDE** : Employés de l'UdeM qui conseillent les étudiants sur leur parcours scolaires, valident l'admissibilité et peuvent intervenir en cas de conflits d’horaire ou de situations spéciales.
+
+- **Professeurs et chargés de cours** : 
+Personnes membres du personnel enseignant qui s'occupent de planifier les cours donnés aux étudiants de l'UdeM pour chaque programme. Chaque professeur a sa propre manière de donner un cours. Les méthodes d'évaluations, la charge de travail ainsi que la nature du cours dépends de eux.
+- **Services administratifs / Faculté** :
+Gèrent la publication des horaires, des groupes, des inscriptions et des résultats académiques agrégés.
+
 
 ### Dépendances
 - Accès aux données officielles via l’API Planifium.  
@@ -41,7 +52,12 @@ L’étudiant peut rechercher un cours, vérifier son admissibilité (prérequis
 - Les résultats académiques sont fournis sous format CSV agrégé.  
 - Pour la Phase 1, toutes les données externes sont simulées par des fichiers statiques.  
 
-### Contraintes
-- Respect de l’échéancier : vérification a faire avec le responsable de l'équipe le 28 septembre et remise du devoir le 10 octobre.  
-- Pas d’implémentation finale ni d’optimisation de performance en Phase 1 
-- Le système reste un prototype documentaire et conceptuel à cette étape.
+
+### Contraintes du domaine
+
+- Les résultats académiques publiés par l’UdeM sont **agrégés** et anonymes et ne couvrent pas nécessairement tous les cours ni toutes les sessions.
+- Les avis étudiants sont non vérifiés et vont être évidement subjectifs ce qui peut entraîner des biais ou des informations contradictoires.
+- L’Université selon la Loi 25 ne peut pas diffuser aucune donnée permettant d’identifier un étudiant donc toute donnée utilisée doit être anonymisée.
+- Les informations officielles (horaires, prérequis, plans de cours) sont publiées dans différentes plateformes.
+- Les règles de programme (prérequis, blocs, cycles) doivent être strictement respectées pour que l’étudiant puisse s’inscrire à un cours.
+
