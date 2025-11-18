@@ -22,6 +22,8 @@ Ils permettent de traduire les besoins en fonctionnalités concrètes, visibles 
 
 ## Détail
 
+![Diagramme de CU](Diagramme de CU copy.jpeg)
+
 ### CU01 - Connexion
 
 **Nom** : Connexion  
@@ -55,12 +57,12 @@ Ils permettent de traduire les besoins en fonctionnalités concrètes, visibles 
 **Acteurs** : Étudiant (principal), Système (secondaire)  
 **Préconditions** : Étudiant connecté au système.  
 **Postconditions** : Les cours correspondant aux critères sont affichés, avec éligibilité et informations pertinentes.  
-**Déclencheur** : L’étudiant saisit un mot-clé, code ou titre dans la barre de recherche.  
+**Déclencheur** : L’étudiant saisit un mot clé, code ou titre dans la barre de recherche.  
 **Dépendances** : CU01 - Connexion.  
 
 #### Scénario principal
-1. L’étudiant saisit un code, titre ou mot-clé dans la barre de recherche.  
-2. Le système récupère les informations depuis Planifium, les résultats académiques et les avis étudiants.  
+1. L’étudiant écrit un code, titre ou mot clé dans la barre de recherche.  
+2. Le système récupère les informations de Planifium, les résultats académiques et les avis étudiants.  
 3. Le système filtre et agrège les données selon le profil de l’étudiant.  
 4. Le système affiche la liste des cours correspondant aux critères, avec informations pertinentes (prérequis, co-requis, charge estimée, avis).  
 

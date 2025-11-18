@@ -22,8 +22,8 @@ Ce modèle ressemble au **MVC** :
 
 - **Techniques** :  
   - Hébergement sur un serveur web simple.  
-  - Base de données relationnelle (PostgreSQL) ou NoSQL (MongoDB).  
-  - Utilisation des formats standards : JSON (API) et CSV (résultats).  
+  - Base de données relationnelle (PostgreSQL) ou NoSQL  
+  - Utilisation des formats standards comme JSON pour l'API et CSV pour les résultats.  
 
 - **Exigences** :  
   - **Sécurité** : connexion sécurisée, protection des données personnelles (Loi 25).  

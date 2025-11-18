@@ -6,48 +6,88 @@ title: Analyse des besoins - Risques
 
 ## Identification des risques
 
-### Risque 1 – Manque de familiarité avec les outils techniques (MkDocs / Git / API)
-- **Probabilité** : Élevée  
-- **Impact** : Moyen  
-- **Plan de mitigation** :  
-  - Désigner un responsable pour l’installation et la configuration initiale  
-  - Partager un guide interne d’utilisation des outils  
-  - Prévoir du temps tampon pour résoudre les problèmes techniques en amont  
+---
 
-### Risque 2 – Difficultés d’intégration avec l’API Planifium ou le bot Discord
-- **Probabilité** : Moyenne  
-- **Impact** : Élevé  
-- **Plan de mitigation** :  
-  - Utiliser des données simulées (CSV/JSON) pour la Phase 1  
-  - Reporter l’intégration réelle à la Phase 2  
-  - Prévoir un processus alternatif d’import manuel des données  
+## Risque 1 – Qualité variable/biaisée des avis étudiants  
+**Justification :** Les avis recueillis sur Discord ou par d'autres moyens sont subjectifs et pourait contenir du spam, des doublonsou des opinions extrêmes. Une mauvaise qualité d’avis peut affecter la fiabilité du système.  
 
-### Risque 3 – Biais ou manipulation des avis étudiants
-- **Probabilité** : Moyenne  
-- **Impact** : Élevé  
-- **Plan de mitigation** :  
-  - N’afficher les avis qu’à partir de n≥5  
-  - Détection et filtrage des doublons  
-  - Modération manuelle des cas extrêmes  
+- **Probabilité :** Moyenne  
+- **Impact :** Élevé  
+- **Plan de mitigation :**  
+  - N’afficher les statistiques que si **n ≥ 5** avis distincts.  
+  - Filtrer les doublons et avis suspects.  
+  - Isoler les commentaires textuels des statistiques chiffrées.  
+  - Mettre un message “avis non représentatifs” au besoin.  
 
-### Risque 4 – Sous-estimation de la charge de travail étudiante
-- **Probabilité** : Moyenne  
-- **Impact** : Moyen  
-- **Plan de mitigation** :  
-  - Comparaison multi-cours avec estimation d’heures/semaine  
-  - Documentation claire des critères d’estimation  
-  - Mise à jour continue selon les retours des étudiants  
+---
 
-### Risque 5 – Disponibilité limitée des membres de l’équipe
-- **Probabilité** : Moyenne  
-- **Impact** : Moyen  
-- **Plan de mitigation** :  
-  - Répartition claire des tâches  
-  - Suivi hebdomadaire de l’avancement  
-  - Documentation commune pour faciliter la reprise par un autre membre  
+## Risque 2 – Données officielles incomplètes, obsolètes ou changeantes  
+**Justification :** On sait que les cours, les horaires, les prérequis et les résultats académiques changent d’une session à l’autre. Les sources officielles qu'on utilisent pourraient ne pas être à jour ou avoir des informations éronnées. Le format des CSV peut également évoluer. On doit donc faire attention a tout ca. 
 
-## Modification du processus opérationnel
+- **Probabilité :** Moyenne  
+- **Impact :** Élevé  
+- **Plan de mitigation :**  
+  - Afficher la session associée à chaque donnée.  
+  - Marquer certaines données comme “non disponibles” si nécessaire.  
+  - Encapsuler Planifium et les CSV dans des composants séparés.  
+  - Valider le format lors de l’importation des données.  
 
->Non applicable pour la phase 1
-risques.md
-2 Ko
+---
+
+## Risque 3 – Indisponibilité ou instabilité des services externes (Planifium, Discord)  
+**Justification :** Le système dépend d’une API externe (Planifium) et de collecte d’avis externe (Discord). Si il y a un problème avec un de ces deux éléments ca peut empêcher la recherche de cours, l’importation d’horaires ou la réception d’avis.  
+
+- **Probabilité :** Moyenne  
+- **Impact :** Élevé  
+- **Plan de mitigation :**  
+  - Utiliser des données locales simulées lorsque les services externes sont inaccessibles.  
+  - Implémenter un mécanisme de cache local pour les données de cours.  
+ 
+---
+
+## Risque 4 – Incohérence entre les différentes sources de données  
+**Justification :** Un même cours peut avoir plusieurs sources d’information (Planifium, résultats académiques qui disent une chose, avis Discord qui disent une autre). Ces sources peuvent se contredire, ce qui peut causer un mauvais conseil pour l’étudiant qui sera plus mélangé que guidé.  
+
+- **Probabilité :** Moyenne  
+- **Impact :** Moyen à Élevé  
+- **Plan de mitigation :**  
+  - Définir une source d’autorité par exemple les résultats abrégés sont plus importants que les opinions de discord.
+  - Indiquer clairement dans l’interface la provenance des données affichées.  
+
+---
+
+## Risque 5 – Confusion dans l’interprétation des règlements (prérequis, cycles, admissibilité)  
+**Justification :** Les règles pour être admissible à un cours peuvent êtres complexes : plusieurs prérequis, des équivalences, cycles particuliers acceptés seulement. Une mauvaise logique pourrait indiquer par erreur qu’un étudiant est admissible alors qu’il ne l’est pas (ou le contraire).  
+
+- **Probabilité :** Moyenne  
+- **Impact :** Très élevé  
+- **Plan de mitigation :**  
+  - Implémenter une a vérification de l’éligibilité.  
+  - Tester les règles avec plusieurs cas limites et rares (prérequis multiples, exceptions).  
+  - Afficher la liste exacte des raisons d’admissibilité ou. inadmissibilité.  
+
+---
+
+## Risque 6 – Problèmes liés à la confidentialité et à la Loi 25  
+**Justification :** Le système manipule des données provenant d’étudiants. Même si elles sont agrégées, on doit faire attention a ce que aucune donnée permete l’identification d’une personne et donc on a besoin de contraintes qui s'en occupe.  
+
+- **Probabilité :** Faible à Moyenne  
+- **Impact :** Très élevé  
+- **Plan de mitigation :**  
+  - Ne jamais stocker d’identifiants Discord.  
+  - Utiliser uniquement des données agrégées et anonymes.  
+  - Documenter l’ensemble des données manipulées pour valider leur conformité.  
+
+---
+
+## Risque 7 – Erreurs d’agrégation ou de calcul dans les statistiques  
+**Justification :** Des erreurs dans les moyennes, le calcul de difficulté ou la charge de travail pourraient fournir des informations incorrectes et induire les étudiants en erreur.  
+
+- **Probabilité :** Moyenne  
+- **Impact :** Élevé  
+- **Plan de mitigation :**  
+  - Valider les statistiques en comparant avce les fichiers sources.  
+  - Tester les agrégations.  
+ 
+
+---
