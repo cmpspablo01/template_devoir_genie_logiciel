@@ -22,7 +22,7 @@ Il permet d’établir un langage commun entre toutes les parties prenantes.
 | Session / Trimestre | Période d’enseignement (Hiver Été Automne) durant laquelle certains cours sont offerts ou pas offerts. |
 | Cheminement | Séquence recommandée par l'UdeM comme le parcours idéal de cours à suivre au fil des sessions, incluant les cours obligatoires et optionnels. |
 | Cycle | Niveau d’études : 1er cycleé :baccalauréat, 2e cycle:maîtrise, 3e cycle : doctorat. |
-| Prérequis / Corequis || Conditions qu’un étudiant doit remplir pour pouvoir s’inscrire à un cours. |
+| Prérequis / Corequis | Conditions qu’un étudiant doit remplir pour pouvoir s’inscrire à un cours. |
 | Résultats académiques agrégés | l'ensemble des statistiques sur un cours comme la moyenne finale, nombre d’inscrits, échecs. |
 | Charge de travail | Temps estimé qu’un étudiant doit consacrer au cours pour le réussir. |
 | Avis étudiants | L'opinion des étudiants qui ont pris le cours dans le passé par exemple s’il est facile ou difficile. |
