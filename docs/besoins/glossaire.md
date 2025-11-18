@@ -21,7 +21,7 @@ Il permet d’établir un langage commun entre toutes les parties prenantes.
 | Programme d’études | L'ensemble de cours qu’un étudiant doit suivre et réussir pour obtenir un diplôme BAC. |
 | Session / Trimestre | Période d’enseignement (Hiver Été Automne) durant laquelle certains cours sont offerts ou pas offerts. |
 | Cheminement | Séquence recommandée par l'UdeM comme le parcours idéal de cours à suivre au fil des sessions, incluant les cours obligatoires et optionnels. |
-| Cycle | Niveau d’études : 1er cycleé :(baccalauréat, 2e cycle:maîtrise, 3e cycle : doctorat. |
+| Cycle | Niveau d’études : 1er cycleé :baccalauréat, 2e cycle:maîtrise, 3e cycle : doctorat. |
 | Prérequis / Corequis || Conditions qu’un étudiant doit remplir pour pouvoir s’inscrire à un cours. |
 | Résultats académiques agrégés | l'ensemble des statistiques sur un cours comme la moyenne finale, nombre d’inscrits, échecs. |
 | Charge de travail | Temps estimé qu’un étudiant doit consacrer au cours pour le réussir. |
