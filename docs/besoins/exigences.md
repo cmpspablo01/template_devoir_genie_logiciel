@@ -45,50 +45,105 @@ title: Analyse des besoins - Exigences
 
 ---
 
-## Exigences non fonctionnelles
-
-- [ ] **ENF1 – Conformité légale**
-  - Le système respecte la Loi 25 (protection des données).
-  - Vérification : données anonymisées, accès journalisé, consentement explicite.
-
-- [ ] **ENF2 – Accessibilité et clarté**
-  - Les informations sont présentées de manière claire et utile, avec une interface simple.
-  - Vérification : test utilisateur de base.
-
-- [ ] **ENF3 – Fiabilité des données**
-  - Les agrégations sont cohérentes et exactes.
-  - Vérification : tests avec jeux de données simulés.
-
-- [ ] **ENF4 – Performance minimale**
-  - Les recherches retournent un résultat en moins de 2 secondes (prototype local).
-  - Vérification : test manuel.
-
-- [ ] **ENF5 – Maintenabilité**
-  - Le projet doit être documenté (README, structure claire).
-  - Vérification : relecture par un pair, existence de documentation minimale.
+# Exigences non fonctionnelles
 
 ---
 
-## Priorisation
+## ENF1 – Conformité légale (Loi 25)
 
-- **Critique** : EF1 (avis), EF3 (recherche + éligibilité), EF5 (résultats académiques)  
-- **Important** : EF2 (profil), EF4 (comparaison)  
-- **Souhaitable** : optimisations de performance (ENF4), accessibilité avancée (ENF2)  
+- Système ne doit jamais stocker de données qui permetrait d'identifier des étudiants (identifiant Discord, nom, courriel).  
+- Les fichiers CSV et JSON qu'on utilisent doivent contenir uniquement des données agrégées et anonymes.  
+- les données qui viennet d’une source externe doivent être vérifiée pour s’assurer qu’elle ne permetent pas d’identifier une personne.  
+- **Vérification :** inspection manuelle des structures de données + revue de sécurité interne.
 
-## Types d'utilisateurs
+---
 
-> Identifier les différents profils qui interagiront avec le système.
+## ENF2 – Accessibilité et clarté
 
-| Type d’utilisateur      | Description                               | Exemples de fonctionnalités accessibles |
-|--------------------------|-------------------------------------------|------------------------------------------|
-| Étudiant authentifié     | Profil personnel enregistré               | Personnalisation, comparaison, avis      |
-| Administrateur           | Gestion avancée (Phase 1 limitée à l’import) | Import CSV, validation des avis, configuration |
+- L’interface doit permettre d’accéder aux informations essentielles d’un cours  
+  (accéder aux **horaires**, **résultats académiques**, **avis étudiants**) en moins de 3 actions donc rapide et efficace.  
+- Les blocs d’infos doivent être clairement labelled :  
+  - “Résultats académiques”  
+  - “Avis étudiants”  
+  - “Éligibilité”  
+- Les messages d’erreur qu'on met (ex. “Pas assez d’avis”, “Aucune donnée disponible”) doivent être claires et facil a comprendre.  
+- **Vérification :** on va faire des tests utilisateurs pour vérifier tout ca  
 
+---
 
+## ENF3 – Fiabilité et exactitude des données
 
-## Infrastructures
+- Les statistiques calculées (moyenne, difficulté, charge de travail) doivent être proche aux données sources avec une incertitude maximale de ±0,1.  
+- On recalcule automatiquement à chaque ajout d’avis ou de note les moyennes.  
+- Le système doit indiquer clairement de quelle session les données affichées proviennent pour éviter les confusions.  
+- **Vérification :** comparaison systématique entre données sources (CSV/JSON) et données affichées.
 
-- **Phase 1** : Prototype local avec MkDocs (site statique).  
-- **Données** : fichiers CSV (résultats académiques simulés), JSON (avis étudiants simulés).  
-- **Intégrations prévues (Phase 2)** : API Planifium, Bot Discord.  
-- **Hébergement cible** : GitHub Pages ou serveur interne UdeM. 
+---
+
+## ENF4 – Performance minimale
+
+- Une recherche de cours sur un jeu de données contenant jusqu’à 1 000 cours par exemple doit retourner une réponse en moins de 2 secondes pour que ce soit efficace et rapide.  
+- Le chargement du tableau de bord d’un cours incluant résultats t avis doit s’effectuer en 1 seconde si les données sont locales.  
+- **Vérification :** mesures avec des tests manuels.
+
+---
+
+## ENF5 – Interopérabilité
+
+- Toutes les fonctionnalités doivent être faites via une API REST utilisant le format JSON.  
+- La structure des données doit être compatible avec une future interface web et un bot Discord.  
+- Les URL doivent suivre un format standard (`/courses/{code}`, `/reviews`, `/compare`).  
+- **Vérification :** tests d’appel API via curl / Postman.
+
+---
+
+## ENF6 – Maintenabilité et évolutivité
+
+- Le code doit être organisé avec une architecture claire (ex. MVC : contrôleurs, services, stockage).  
+- Le système doit permettre le remplacement plus tarde si nécessaire :  
+  - de la source des cours (Planifium)  
+  - du stockage des avis  
+  - de la méthode d’authentification  
+- **Vérification :** revue de code + documentation dans le README.
+
+---
+
+# Infrastructures
+
+Section qui décrit les choix techniques liés au stockage, à l’hébergement et à l’évolution du système. 
+
+---
+
+## Phase 1 – Prototype local
+
+- Le système fonctionne entièrement en local.  
+- Les données sont stockées dans :  
+  - Un csv pour les résultats académiques simulés  
+  - JSON pour les avis étudiants  
+- L’ensemble du projet est présenté avec MkDocs  
+- Le site de documentation est hébergé via GitHub Pages.
+
+---
+
+## Phase 2 – Intégration externe (prévue)
+
+- **Planifium API** ca va être la source officielle de tous les cours de l'UdeM et leurs horaires.  
+- Un **bot Discord** sera capable d’envoyer automatiquement les avis au backend.  
+- Le stockage évoluera vers une base de données relationnelle comme PostgreSQL ou SQLite afin de gérer plus de données.
+
+---
+
+## Hébergement et déploiement envisagés
+
+- Le backend pourrait être déployé à l'interne sur un serveur de UdeM ou une machine virtuelle de l’équipe.  
+- Le déploiement qu'on fera devra utiliser HTTPS pour sécuriser les échanges de données.  
+- Les endpoints sensibles ont leur mettra une **authentification admin** pour que pas toute le monde puisse jouer avec.  
+- La documentation restera sur GitHub pour faciliter l’accès à l’équipe et aux auxiliaires.
+
+---
+
+## Sécurité
+
+- L’ensemble des communications externes avec Planifium, Discord vers le  backend devront utiliser **HTTPS**.  
+- Les accès admins devront être protégés par d'authentification simple comme un mdp.  
+- Les fichiers CSV importés devront être vérifiés pour empêcher l’injection de contenu dangereux .
