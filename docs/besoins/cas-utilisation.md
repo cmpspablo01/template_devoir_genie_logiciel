@@ -91,27 +91,6 @@ Ils permettent de traduire les besoins en fonctionnalités concrètes, visibles 
 2a. Un ou plusieurs cours sélectionnés n’ont pas assez de données.  
   2a.1. Le système affiche un avertissement sur la fiabilité des informations.  
 
----
-
-### CU04 - Consulter avis étudiants
-
-**Nom** : Consulter avis étudiants  
-**But** : L’étudiant souhaite voir les avis agrégés pour un cours afin d’estimer la difficulté et la charge de travail.  
-**Acteurs** : Étudiant (principal), Système (secondaire)  
-**Préconditions** : Étudiant connecté, au moins 5 avis disponibles pour le cours.  
-**Postconditions** : Les avis sont affichés de façon agrégée et lisible.  
-**Déclencheur** : L’étudiant sélectionne “Avis étudiants” pour un cours.  
-**Dépendances** : CU01 - Connexion, CU02 - Rechercher un cours.  
-
-#### Scénario principal
-1. L’étudiant clique sur l’onglet “Avis étudiants”.  
-2. Le système récupère les avis depuis la base Discord.  
-3. Le système filtre les avis selon le profil de l’étudiant (préférences théorie/pratique).  
-4. Le système affiche les avis agrégés et les commentaires principaux.  
-
-#### Scénarios alternatifs
-2a. Moins de 5 avis disponibles.  
-  2a.1. Le système affiche un message “Avis insuffisants pour ce cours”.  
 
 ---
 
