@@ -125,3 +125,4 @@ Le système adopte une architecture **client-serveur** avec une séparation clai
 
 ![Diagramme C4 Niveau 3](modelC4_niveau3.png)
 
+![![alt text](image.png)](image.png)
