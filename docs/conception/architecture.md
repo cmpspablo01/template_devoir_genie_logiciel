@@ -75,4 +75,53 @@ Le système adopte une architecture **client-serveur** avec une séparation clai
 
 ![Diagramme C4 Niveau 2](modelC4_niveau2.png)
 
+### Niveau 3 – Vue des composantes (Backend API REST)
+
+- **Conteneur détaillé** : Backend API REST de la plateforme OptiCoursUdeM.   
+- **Organisation** :  
+  - Contrôleurs REST (interface d’entrée).  
+  - Composantes métier (logique interne).  
+  - Systèmes externes (BD, API, CSV, Bot Discord).
+
+#### Composantes internes
+- **CoursController**  
+  Traite les requêtes liées à la recherche de cours, à l’affichage des détails et à la vérification de l’éligibilité.
+
+- **AvisController**  
+  Reçoit les avis étudiants et permet la consultation des avis d’un cours.
+
+- **ComparisonController**  
+  Gère la comparaison de plusieurs cours et la préparation de la vue comparative tel qie charge totale et conflits d’horaire.
+
+---
+
+- **Composant de gestion des cours**  
+  Logique liée aux cours : recherche, assemblage des données officielles obtenu avec Planifium, prérequis, cycle et construction de la fiche détaillée.
+
+- **Composant d’agrégation des avis**  
+  Filtre et agrège les avis étudiants, applique la règle *n ≥ 5* et calcule les statistiques (difficulté du cours sur 5 selon les avis, charge de travail selon les avis, commentaires).
+
+- **Composant de comparaison des cours**  
+  Calcule la charge totale estimée, détecte les conflits d’horaire et affiche les caractéristiques lors de la comparaison.
+
+- **Composant des résultats académiques**  
+  Importe les fichiers CSV, extrait les statistiques tel que les moyenne, inscriptions , échecs et les stocke dans la base de données.
+
+---
+
+#### Systèmes externes utilisés
+
+- **Base de données interne (SQL)**  
+  Contient les cours indexés, les avis, les profils étudiants, et les résultats académiques importés.
+
+- **API Planifium**  
+  Fournit les informations officielles (titre, prérequis, crédits, horaires, cycles).
+
+- **Fichiers CSV (résultats académiques)**  
+  Source de données pour les moyennes, le nombre d’inscrits et le nombre d’échecs.
+
+- **Bot Discord**  
+  Envoie les avis étudiants vers l’API sous forme de requêtes HTTP, traitées par AvisController.
+
+![Diagramme C4 Niveau 3](modelC4_niveau3.png)
 
