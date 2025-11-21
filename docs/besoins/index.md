@@ -27,25 +27,20 @@ Le domaine étudié est celui du **choix de cours des étudiants de l'Universit�
 - Au besoin, il contacte les **TGDE** pour valider son admissibilité, clarifier des règles de programme ou planifier son cheminement.
 
 
-### Acteurs du système
+### Acteurs du domaine
 
-- **Étudiant**  
-  Utilise la plateforme pour choisir ses cours, consulter les avis, les résultats académiques, comparer des cours et personnaliser son profil.
+- **Étudiants de l'Université de Montréal** :  
+  Personnes qui doivent choisir leurs cours à chaque session en tenant compte des exigences de leur programme, des conflits d'horaire, des prérequis et de la charge de travail.
 
-- **TGDE (Technicien·ne en gestion des dossiers étudiants)**  
-  Utilise la plateforme pour visualiser le cheminement d’un étudiant, vérifier son admissibilité et valider la cohérence de sa sélection de cours.
+- **TGDE** :  
+  Employés de l'UdeM qui conseillent les étudiants sur leur parcours scolaires, valident l'admissibilité et peuvent intervenir en cas de conflits d’horaire ou de situations spéciales.
 
-- **Professeur / Chargé de cours**  
-  Consulte les statistiques agrégées de ses cours (résultats académiques, avis, charge de travail perçue) pour ajuster son enseignement ou préparer les sessions suivantes.
+- **Professeurs et chargés de cours** :  
+  Personnes membres du personnel enseignant qui s'occupent de planifier les cours donnés aux étudiants de l'UdeM pour chaque programme. Chaque professeur a sa propre manière de donner un cours. Les méthodes d'évaluations, la charge de travail ainsi que la nature du cours dépendent d'eux.
 
-- **Administrateur du système**  
-  Responsable de l’import des fichiers CSV de résultats académiques, de la configuration de la synchronisation avec Discord et de la gestion technique de la plateforme.
+- **Services administratifs / Faculté** :  
+  Gèrent la publication des horaires, des groupes, des inscriptions et des résultats académiques agrégés.
 
-- **Service d’authentification de l’UdeM**  
-  Service externe qui authentifie les utilisateurs (étudiants, TGDEs, professeurs, administrateurs) avant qu’ils puissent accéder à la plateforme.
-
-- **Bot Discord**  
-  Service externe qui transmet périodiquement les avis étudiants anonymisés vers la plateforme, selon les paramètres définis par l’administrateur.
 
 
 ### Dépendances
