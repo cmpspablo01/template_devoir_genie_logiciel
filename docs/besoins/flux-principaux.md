@@ -12,7 +12,7 @@ L'objectif est de décrire les flux d’interaction entre les acteurs et le syst
 
 Voici le diagramme d'activité UML représentant le processus de recherche de cours :
 
-![Diagramme de recherche de cours](Activity_Diagram1.jpg)
+![Diagramme d'Activités](Activity_Diagram1.jpg)
 
 
 ### Description des flux complexes

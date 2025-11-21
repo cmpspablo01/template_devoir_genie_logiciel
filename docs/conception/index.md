@@ -18,7 +18,7 @@ Ce modèle ressemble au **MVC** :
 - Contrôleur = l’API backend,  
 - Modèle = la base de données.  
 
-## Contraintes prises en compte![alt text](image.png)
+## Contraintes prises en compte
 
 - **Techniques** :  
   - Hébergement sur un serveur web simple.  
