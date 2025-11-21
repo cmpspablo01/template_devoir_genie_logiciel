@@ -37,7 +37,7 @@ Ils traduisent les besoins en fonctionnalités concrètes, du point de vue des u
 
 ## Diagramme de cas d’utilisation
 
-![Diagramme des cas d'utilisation](![alt text](<cas d utilisateur diageramme.png>))
+![Diagramme des cas d'utilisation](cas_utilisateur_diagramme.png)
 
 ---
 
