@@ -9,7 +9,7 @@ title: Analyse des besoins - Risques
 ---
 
 ## Risque 1 – Qualité variable/biaisée des avis étudiants  
-**Justification :** Les avis recueillis sur Discord ou par d'autres moyens sont subjectifs et pourait contenir du spam, des doublonsou des opinions extrêmes. Une mauvaise qualité d’avis peut affecter la fiabilité du système.  
+**Justification :** Les avis recueillis sur Discord ou par d'autres moyens sont subjectifs et pouraient contenir du spam, des doublons ou des opinions extrêmes. Une mauvaise qualité d’avis peut affecter la fiabilité du système.  
 
 - **Probabilité :** Moyenne  
 - **Impact :** Élevé  
@@ -22,7 +22,7 @@ title: Analyse des besoins - Risques
 ---
 
 ## Risque 2 – Données officielles incomplètes, obsolètes ou changeantes  
-**Justification :** On sait que les cours, les horaires, les prérequis et les résultats académiques changent d’une session à l’autre. Les sources officielles qu'on utilisent pourraient ne pas être à jour ou avoir des informations éronnées. Le format des CSV peut également évoluer. On doit donc faire attention a tout ca. 
+**Justification :** On sait que les cours, les horaires, les prérequis et les résultats académiques changent d’une session à l’autre. Les sources officielles qu'on utilise pourraient ne pas être à jour ou avoir des informations erronées. Le format des CSV peut également évoluer.  
 
 - **Probabilité :** Moyenne  
 - **Impact :** Élevé  
@@ -35,41 +35,40 @@ title: Analyse des besoins - Risques
 ---
 
 ## Risque 3 – Indisponibilité ou instabilité des services externes (Planifium, Discord)  
-**Justification :** Le système dépend d’une API externe (Planifium) et de collecte d’avis externe (Discord). Si il y a un problème avec un de ces deux éléments ca peut empêcher la recherche de cours, l’importation d’horaires ou la réception d’avis.  
+**Justification :** Le système dépend d’une API externe (Planifium) et de la collecte d’avis via Discord. Une indisponibilité temporaire de ces services peut empêcher la recherche de cours, la récupération des horaires ou la réception d’avis.  
 
 - **Probabilité :** Moyenne  
 - **Impact :** Élevé  
 - **Plan de mitigation :**  
-  - Utiliser des données locales simulées lorsque les services externes sont inaccessibles.  
-  - Implémenter un mécanisme de cache local pour les données de cours.  
- 
----
+  - Implémenter mécanisme de mise en cache local temporaire pour les données Planifium.  
+  - Détecter l’erreur et afficher un message clair à l’étudiant (“Service temporairement indisponible”).  
+  - Permettre la continuité minimale avec les données déjà chargées.  
 
-## Risque 4 – Incohérence entre les différentes sources de données  
-**Justification :** Un même cours peut avoir plusieurs sources d’information (Planifium, résultats académiques qui disent une chose, avis Discord qui disent une autre). Ces sources peuvent se contredire, ce qui peut causer un mauvais conseil pour l’étudiant qui sera plus mélangé que guidé.  
+## Risque 4 – Mauvaise intégration ou fusion des données dans le système  
+**Justification :** Même si les différentes sources de données ne sont pas contradictoires entre elles, leur intégration dans notre app peut introduire des erreurs. Par exemple, afficher des résultats académiques d’une mauvaise session, associer par erreur des avis au mauvais cours. Ce type de mauvaise fusion de l’information pourrait mener l’étudiant à mal interpréter les données et prendre de mauvaises décisions.  
 
 - **Probabilité :** Moyenne  
 - **Impact :** Moyen à Élevé  
 - **Plan de mitigation :**  
-  - Définir une source d’autorité par exemple les résultats abrégés sont plus importants que les opinions de discord.
-  - Indiquer clairement dans l’interface la provenance des données affichées.  
+  - Vérifier systématiquement l’association cours/session avant d’afficher une donnée.  
+  - Normaliser les formats d’affichage pour éviter les confusions.  
+  
 
----
 
 ## Risque 5 – Confusion dans l’interprétation des règlements (prérequis, cycles, admissibilité)  
-**Justification :** Les règles pour être admissible à un cours peuvent êtres complexes : plusieurs prérequis, des équivalences, cycles particuliers acceptés seulement. Une mauvaise logique pourrait indiquer par erreur qu’un étudiant est admissible alors qu’il ne l’est pas (ou le contraire).  
+**Justification :** Les règles pour être admissible à un cours peuvent être complexes (prérequis multiples, équivalences, cycles particuliers). Le risque provient d’une mauvaise implémentation du moteur d’admissibilité.  
 
-- **Probabilité :** Moyenne  
+- **Probabilité :** Faible  
 - **Impact :** Très élevé  
 - **Plan de mitigation :**  
-  - Implémenter une a vérification de l’éligibilité.  
-  - Tester les règles avec plusieurs cas limites et rares (prérequis multiples, exceptions).  
-  - Afficher la liste exacte des raisons d’admissibilité ou. inadmissibilité.  
+  - Implémenter une vérification d’éligibilité centralisée et bien définie.  
+  - Tester les règles avec plusieurs cas limites (prérequis multiples, exceptions).  
+  - Afficher la liste exacte des raisons d’admissibilité ou d’inadmissibilité.  
 
 ---
 
 ## Risque 6 – Problèmes liés à la confidentialité et à la Loi 25  
-**Justification :** Le système manipule des données provenant d’étudiants. Même si elles sont agrégées, on doit faire attention a ce que aucune donnée permete l’identification d’une personne et donc on a besoin de contraintes qui s'en occupe.  
+**Justification :** Le système manipule des données provenant d’étudiants. Même si elles sont agrégées, on doit faire attention à ce qu’aucune donnée ne permette l’identification d’une personne.  
 
 - **Probabilité :** Faible à Moyenne  
 - **Impact :** Très élevé  
@@ -83,11 +82,9 @@ title: Analyse des besoins - Risques
 ## Risque 7 – Erreurs d’agrégation ou de calcul dans les statistiques  
 **Justification :** Des erreurs dans les moyennes, le calcul de difficulté ou la charge de travail pourraient fournir des informations incorrectes et induire les étudiants en erreur.  
 
-- **Probabilité :** Moyenne  
+- **Probabilité :** Faible  
 - **Impact :** Élevé  
 - **Plan de mitigation :**  
-  - Valider les statistiques en comparant avce les fichiers sources.  
-  - Tester les agrégations.  
- 
+  - Valider les statistiques en comparant avec les fichiers sources.  
+  - Tester les fonctions d’agrégation.  
 
----
