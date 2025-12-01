@@ -5,7 +5,7 @@ title: Conception - Diagrammes UML
 # Diagrammes UML
 
 ## Diagrammes de classes
-![Diagramme de classes](diagramme_de_classes.png)
+![Diagramme de classes](diagramme_declasesesfinale.png)
 - Modèle de données orienté objet
 ## Diagrammes de séquence
 ### Diagramme de séquences de recherche de cours
