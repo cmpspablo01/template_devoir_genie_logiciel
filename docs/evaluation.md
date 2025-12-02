@@ -248,6 +248,79 @@ title: Évaluation et tests
 	- Vérifie que compareCourses gère correctement une API vide sans planter.
 
 ---
+### 11. `testCompareCourses_retourneListeVideQuandIdsVides`
+
+- **Cas d’utilisation lié :**  
+  CU *Comparer des cours* (`compareCourses`)
+
+- **Arguments / contexte :**
+  - Le `FakeHttpClientApi` est configuré avec deux cours :
+    - `IFT1015 – Programmation 1` (3 crédits)
+    - `IFT2035 – Concepts des langages de programmation`
+  - Liste d’IDs fournie :  
+    `["IFT1015", "IFT2035"]`
+  - Paramètres :  
+    - `include_schedule = "true"`  
+    - `schedule_semester = "A25"`
+
+- **Résultat attendu :**
+  - Le résultat retourné n’est pas nul (`assertNotNull(result)`).
+  - Le test valide que la méthode accepte les paramètres et exécute l’appel sans erreur.
+
+- **Effets de bord attendus :**
+  - Aucun effet de bord.
+  - Le service ne fait qu’appeler le client HTTP avec les paramètres fournis.
+
+---
+
+### 12. `testCompareCourses_ignoreIdsInvalides`
+
+- **Cas d’utilisation lié :**  
+  CU *Comparer des cours* (`compareCourses`)
+
+- **Arguments / contexte :**
+  - Le `FakeHttpClientApi` renvoie un seul cours :
+    - `IFT1015 – Programmation 1` (3 crédits)
+  - Liste des IDs transmise :
+    - `"   "` (chaîne vide / blanche)
+    - `null`
+    - `"IFT1015"` (seul ID valide)
+  - Aucun paramètre additionnel.
+
+- **Résultat attendu :**
+  - La liste retournée n’est pas nulle.
+  - La liste contient **exactement 1 cours**, correspondant à l’ID valide.
+  - Le cours retourné a l’ID `IFT1015`.
+
+- **Effets de bord attendus :**
+  - Aucun appel réseau pour les IDs invalides.
+  - Aucun effet de bord.
+  - Vérifie que la méthode filtre correctement les IDs vides ou nuls avant l’appel API.
+
+---
+
+### 13. `testCompareCourses_retourneListeVideQuandApiException`
+
+- **Cas d’utilisation lié :**  
+  CU *Comparer des cours* (`compareCourses`)
+
+- **Arguments / contexte :**
+  - Le `FakeHttpClientApi` est configuré pour lever une exception :
+    - `throwOnGetCourse = true`
+  - Liste d’IDs fournie :  
+    `["IFT1015", "IFT2035"]`
+  - Aucun paramètre additionnel.
+
+- **Résultat attendu :**
+  - La liste retournée n’est pas nulle.
+  - La liste est vide (`isEmpty() == true`).
+  - Aucune exception n’est propagée par `compareCourses`.
+
+- **Effets de bord attendus :**
+  - Aucun effet de bord.
+  - Vérifie que le service capture l’exception API et renvoie proprement une liste vide, sans planter.
+
+---
 
 ## Critères d'évaluation
 
