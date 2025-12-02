@@ -14,28 +14,148 @@ title: Évaluation et tests
 
 ## Plan de test
 
-- - Types de tests réalisés :
-  - Tests unitaires
-  - Tests d’intégration
-  - Tests manuels
-- Outils utilisés : Pytest, Postman, Selenium, etc.
+- Types de tests réalisés :
+  - **Tests unitaires** sur la couche service (`CourseService`, `UserService`)
+  - **Tests manuels** avec l’API REST et la CLI
+  - **Tests d’intégration**
+- Outils utilisés :
+  - **JUnit 5** pour les tests unitaires
+  - **Maven** pour l’exécution automatique des tests (`mvn test`)
+  - **Javalin** pour exposer l’API REST
+  - **CLI Java** pour valider les scénarios utilisateur en ligne de commande
+
+---
+## Oracle de tests 
+
+### 1. `testGetAllCourses_retourneListeDeCoursQuandApiOk`
+
+- **Cas d’utilisation lié :**  
+  CU *Recherche de cours* (`getAllCourses`)
+
+- **Arguments / contexte :**
+  - Le `FakeHttpClientApi` est set up de facon a ce qu'on renvoie deux cours :
+    - `IFT1015 – Programmation 1`
+    - `IFT2035 – Concepts des langages de programmation`
+  - Paramètres de recherche : `name = "programmation"`.
+
+- **Résultat attendu :**
+  - La liste retournée n’est pas nulle.
+  - La liste contient exactement 2 cours
+  - Le premier cours a l’ID `IFT1015`
+  - Le 2e cours a l’ID `IFT2035`
+
+- **Effets de bord attendus :**
+  - Aucun effet de bord   
+  - La méthode ne fait qu’appeler le client HTTP et retourner la liste.
+
+---
+
+### 2. `testGetAllCourses_retourneListeVideQuandApiVide`
+
+- **Cas d’utilisation lié :**  
+  CU *Recherche de cours* (`getAllCourses`)
+
+- **Arguments / contexte :**
+  - Le `FakeHttpClientApi` renvoie une liste vide de cours
+  - Paramètres de recherche : map vide
+
+- **Résultat attendu :**
+  - La liste retournée n’est pas nulle
+  - La liste est vide (`isEmpty() == true`).
+
+- **Effets de bord attendus :**
+  - Aucun effet de bord.
+  - Vérifie que le service gère correctement le cas ou on a “0 résultats” sans erreur
+
+---
+
+### 3. `testGetCourseById_retourneCoursQuandTrouve`
+
+- **Cas d’utilisation lié :**  
+  CU *Voir les détails d’un cours* (`getCourseById`)
+
+- **Arguments / contexte :**
+  - Le `FakeHttpClientApi` renvoie un cours :
+    - ID `IFT2035`
+    - nom `"Concepts des langages de programmation"`
+    - crédits `3.0`
+    - texte de prérequis `"Préalable : IFT1025"`
+  - Appel de `getCourseById("IFT2035")`.
+
+- **Résultat attendu :**
+  - L’`Optional` retourné est présent (`isPresent()`).
+  - L’ID du cours est `IFT2035`.
+  - Le nombre de crédits est `3.0`.
+  - Le texte de prérequis est `"Préalable : IFT1025"`.
+
+- **Effets de bord attendus :**
+  - Aucun effet de bord.
+  - Vérifie que le service donne bien toutes les infos d’un cours quand l’API répond bien 
+
+---
+
+### 4. `testCompareCourses_retourneListeVideQuandListeIdsNulleOuVide`
+
+- **Cas d’utilisation lié :**  
+  CU *Comparer des cours* (`compareCourses`)
+
+- **Arguments / contexte :**
+  - Deux appels successifs :
+    1. `compareCourses(null)`
+    2. `compareCourses(List.of())`
+  - Aucun besoin de configurer le `FakeHttpClientApi` : la méthode doit shutdiwn avant l’appel HTTP quand la liste d’IDs est vide ou nulle.
+
+- **Résultat attendu :**
+  - Pour `null` : le résultat n’est pas nul, mais la liste est vide.
+  - Pour la liste vide : résultat non nul et vide aussi
+
+- **Effets de bord attendus :**
+  - Aucun appel réseau 
+  - Aucun effet de bord.
+  - Vérifie que la méthode est forte face à une entrée invalide et qu’elle ne lance pas d’exception
+
+---
 
 ## Critères d'évaluation
 
-- Présenter les critères utilisés pour évaluer le système.
+- Les tests unitaires doivent :
+  - passer tous sans erreur quand on fait `mvn test`,
+  - couvrir les cas nominaux et plusieurs cas limites comme : liste vide, ID invalide, prérequis manquants, erreur simulée de l’API
+- Le système est jugé satisfiasant ssi :
+  - les CUs *Recherche de cours*, *Détails d’un cours* et *Comparer des cours* sont couverts par au moins un test unitaire chacun,
+  - les scénarios principaux fonctionnent aussi via l’API REST et la CLI.
+
+---
 
 ## Résultats des tests
 
-- Résumé qualitatif :
-  - Comportement attendu obtenu
-  - Bonne robustesse générale
+- **Résumé qualitatif :**
+  - Les tests unitaires confirment que :
+    - la recherche de cours retourne les bonnes listes,
+    - la récupération des détails d’un cours gère correctement cours trouvés et non trouvés,
+    - la comparaison de cours gère les IDs invalides et les erreurs simulées de l’API,
+    - le calcul d’éligibilité respecte bien la logique sur les prérequis.
+  - Le comportement observé correspond aux attentes pour les CUs couverts.
 
-- Résumé quantitatif :
-  - 85 % de couverture de code
-  - Temps de réponse moyen : 1.2s
+- **Résumé quantitatif :**
+  - **14 tests unitaires JUnit** au total :
+    - 11 pour `CourseService`
+    - 3 pour `UserService`
+  - Tous les tests passent avewc succès (`Tests run: 14, Failures: 0, Errors: 0`).
+  - Nous n’avons pas calculé la couverture exacte, mais les tests ciblent les branches principales de la logique métier.
+
+---
 
 ## Évaluation du système
 
-- Qualité globale perçue
-- Facilité d’utilisation
-- Performance en conditions réelles
+- **Qualité globale :**
+  - Le backend s'occupe des CUs du devoir 2 : recherche de cours, détails, comparaison.
+  - L’ajout de la logique d’éligibilité et de la CLI rend l'utilisatiion assez claire
+
+- **Facilité d’utilisation :**
+  - L’API REST reste simple (endpoints `/courses`, `/courses/{id}`, `/courses/comparer`, `/courses/{id}/eligibility`)
+  - La CLI propose un menu clair pour faire les scénarios
+
+- **Performance :**
+  - Les appels vers Planifium sont simples et filtrés.
+  
