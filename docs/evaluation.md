@@ -185,6 +185,69 @@ title: Évaluation et tests
   - Aucun effet de bord persistant.
   - Vérifie le cas nominal : des IDs valides produisent bien une liste de cours correspondante.
 
+---
+
+### 8. `testGetAllCourses_filtreParNom`
+
+- **Cas d’utilisation lié :**
+  - CU *Recherche de cours*  (`getAllCourses via getCourseById`)
+
+-	**Arguments / contexte :**
+  - Le FakeHttpClientApi est configuré pour renvoyer un seul cours :
+	- `IFT1015 – Programmation 1`
+  - Aucun paramètre particulier n’est passé au service.
+  - Appel : `getCourseById("IFT1015")`
+
+-	**Résultat attendu :**
+	- Le résultat retourné est non vide (`isPresent()`).
+	- L’ID du cours retourné est exactement `IFT1015`. 
+
+- **Effets de bord attendus :**
+	- Aucun effet de bord.
+	- Le test vérifie simplement que le service retourne bien le bon cours lorsque l’API renvoie une valeur valide. 
+
+---
+
+### 9. `testGetCourseById_coursInexistantRetourneEmpty`
+
+- **Cas d’utilisation lié :**
+  CU *Voir les détails d’un cours* (`getCourseById`)
+
+- **Arguments / contexte :**
+  - Le FakeHttpClientApi renvoie :
+	  - courseToReturn = null
+	  - throwOnGetCourse = false
+	- Appel : `getCourseById("IFT9999")` (ID qui n’existe pas)
+
+- **Résultat attendu :**
+	- Le résultat est `Optional.empty()`
+	- Le service ne lève aucune exception.
+
+- **Effets de bord attendus :**
+	- Aucun effet de bord.
+	- Le test valide le comportement attendu lorsque l’API Planifium ne trouve pas le cours demandé.
+
+---
+
+### 10. `testCompareCourses_retourneListeVideQuandApiVide`
+
+- **Cas d’utilisation lié :**
+  CU *Comparer des cours* (`compareCourses`)
+
+- **Arguments / contexte :**
+	- Le FakeHttpClientApi renvoie une liste vide :
+	  - coursesToReturn = `List.of()`
+	  - Liste des IDs fournie : `"IFT1015", "IFT2035"`
+
+- **Résultat attendu :**
+  - Le résultat n’est pas null.
+	- Mais la liste doit être vide car l’API n’a renvoyé aucun cours.
+
+- **Effets de bord attendus :**
+	- Aucun effet secondaire.
+	- Vérifie que compareCourses gère correctement une API vide sans planter.
+
+---
 
 ## Critères d'évaluation
 
