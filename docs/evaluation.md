@@ -116,6 +116,76 @@ title: Évaluation et tests
 
 ---
 
+### 5. `testCheckEligibility_etudiantEligibleQuandTousPrerequisOK`
+
+- **Cas d’utilisation lié :**  
+  CU *Évaluer l’éligibilité d’un étudiant à un cours* (`checkEligibility`)
+
+- **Arguments / contexte :**
+  - Le `FakeHttpClientApi` renvoie un cours `IFT2035` dont la liste de prérequis est :
+    - `["IFT1025", "IFT1015"]`.
+  - La liste de cours complétés par l’étudiant est :
+    - `["IFT1025", "IFT1015"]`.
+  - Appel de `checkEligibility("IFT2035", completed)`.
+
+- **Résultat attendu :**
+  - `result.isEligible()` est `true`.
+  - `result.getMissingPrerequisites()` est une liste vide.
+
+- **Effets de bord attendus :**
+  - Aucun effet de bord (lecture seule).
+  - Vérifie le cas nominal : tous les prérequis sont complétés, l’étudiant est bien déclaré éligible.
+
+---
+
+### 6. `testCheckEligibility_nonEligibleQuandPrerequisManquants`
+
+- **Cas d’utilisation lié :**  
+  CU *Évaluer l’éligibilité d’un étudiant à un cours* (`checkEligibility`)
+
+- **Arguments / contexte :**
+  - Le `FakeHttpClientApi` renvoie le même cours `IFT2035` avec les prérequis :
+    - `["IFT1025", "IFT1015"]`.
+  - La liste de cours complétés par l’étudiant est :
+    - `["IFT1025"]` seulement.
+  - Appel de `checkEligibility("IFT2035", completed)`.
+
+- **Résultat attendu :**
+  - `result.isEligible()` est `false`.
+  - `result.getMissingPrerequisites()` contient exactement `["IFT1015"]`.
+
+- **Effets de bord attendus :**
+  - Aucun effet de bord.
+  - Vérifie que le service repère correctement les prérequis manquants et signale la non-éligibilité.
+
+---
+
+### 7. `testCompareCourses_retourneCoursQuandIdsValides`
+
+- **Cas d’utilisation lié :**  
+  CU *Comparer des cours* (`compareCourses(ids, params)`)
+
+- **Arguments / contexte :**
+  - Le `FakeHttpClientApi` est configuré pour renvoyer deux cours :
+    - `IFT1015 – Programmation 1` (3 crédits),
+    - `IFT2035 – Concepts des langages de programmation` (3 crédits).
+  - Liste d’IDs passée au service :
+    - `["IFT1015", "IFT2035"]`.
+  - Paramètres passés à `compareCourses` :
+    - `include_schedule = "true"`,
+    - `schedule_semester = "A25"`.
+
+- **Résultat attendu :**
+  - La liste retournée n’est pas nulle.
+  - La liste contient exactement 2 cours.
+  - Le premier cours a l’ID `IFT1015`.
+  - Le second cours a l’ID `IFT2035`.
+
+- **Effets de bord attendus :**
+  - Aucun effet de bord persistant.
+  - Vérifie le cas nominal : des IDs valides produisent bien une liste de cours correspondante.
+
+
 ## Critères d'évaluation
 
 - Les tests unitaires doivent :
