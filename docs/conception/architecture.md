@@ -125,3 +125,9 @@ Le système adopte une architecture **client-serveur** avec une séparation clai
 
 ![Diagramme C4 Niveau 3](modelC4_niveau3.png)
 
+
+
+### Justification des choix du design 
+
+Pour la conception de notre backend, on a essayé d’utiliser les principes d’architecture qu'on a vu dans le cours, t.q l’abstraction, le faible couplage, la cohésion forte et l’encapsulation. Même si notre implémentation actuelle pour la phase 2 est simple et on utilise une API REST avec Javalin et une interface CLI sans base de données ni modules avancés, on a quand même essayé d'organiser la conception de notre backend comme une architecture modulaire qui pourra plujs tard supporter les fonctionnalités plus complètes prévues dans l’énoncé. Par exemple, les interactions avec les sources externes comme Planifium sont déjà isolées dans HttpClientApi, ce qui va faciliter plus tard l’ajout d’un vrai client d’intégration, d’un store JSON ou d’une BD. On a aussi regroupé chaque responsabilité dans un service t.q CourseService pour la recherche, les détails et l’éligibilité, et ainsi on augmente la cohésion et on évite que la logique se disperse dans les contrôleurs ou dans notre CLI. On encapsule les données derrière ces services et donc l’interface CLI actuellement ou l'interface web dans le futur n’a pas besoin de connaître les détails internes et donc ça rend le système plus clair et plus testable et surtout plus facile à faire évoluer. Même si tout n’est pas encore implémenté comme dans nos diagrammes de conception, on a essayé de penser la structure actuelle pour rester flexible pour les prochaines versions du projet.
+
