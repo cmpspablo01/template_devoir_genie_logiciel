@@ -3,7 +3,7 @@ title: Conception - Modèle de données
 ---
 
 # Modèle de données
-Cette section décrit les entités métier réellement implémentées dans le backend REST (D3) et utilisées par les services et contrôleurs.
+Cette section décrit les entités métier réellement implémentées dans le backend REST et utilisées par les services et contrôleurs.
 
 ## Entités principales
 
