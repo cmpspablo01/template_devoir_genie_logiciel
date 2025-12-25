@@ -12,7 +12,7 @@ title: Évaluation et tests
 
 # Tests et évaluation
 
-## Plan de test
+## Plan de test (Pour devoir 2)
 
 - Types de tests réalisés :
   - **Tests unitaires** sur la couche service (`CourseService`, `UserService`)
@@ -333,7 +333,7 @@ title: Évaluation et tests
 
 ---
 
-## Résultats des tests
+## Résultats des tests (Pour devoir 2)
 
 - **Résumé qualitatif :**
   - Les tests unitaires confirment que :
@@ -352,7 +352,7 @@ title: Évaluation et tests
 
 ---
 
-## Évaluation du système
+## Évaluation du système (Pour devoir 2)
 
 - **Qualité globale :**
   - Le backend s'occupe des CUs du devoir 2 : recherche de cours, détails, comparaison.
@@ -365,3 +365,201 @@ title: Évaluation et tests
 - **Performance :**
   - Les appels vers Planifium sont simples et filtrés.
   
+-------------------------------------------------------------------------------------------
+
+## Plan de test (Pour devoir 3)
+Les tests unitaires présentés ci-dessous ont été initialement développés lors du Devoir 2.
+Ils ont été conservés et réutilisés pour le Devoir 3, car ils couvrent toujours les
+fonctionnalités principales du système et respectent les exigences du présent devoir.
+Pour le Devoir 3, nous sélectionnons 6 fonctionnalités distinctes parmi l’ensemble des tests
+existants afin de satisfaire aux critères d’évaluation.
+
+
+### 1. `testGetAllCourses_retourneListeDeCoursQuandApiOk`
+
+- **Cas d’utilisation lié :**  
+  CU *Recherche de cours* (`getAllCourses`)
+
+- **Arguments / contexte :**
+  -	Le FakeHttpClientApi est configuré pour renvoyer deux cours :
+	    -	`IFT1015 – Programmation 1`
+	    -	`IFT2035 – Concepts des langages de programmation`
+	    -	Paramètres de recherche fournis au service : {`name": "programmation`}
+
+- **Résultat attendu :**
+  -	La liste retournée n’est pas nulle.
+	- La liste contient exactement 2 cours.
+	-	Le premier cours a l’ID IFT1015.
+	-	Le deuxième cours a l’ID IFT2035..
+
+- **Effets de bord attendus :**
+  - Aucun effet de bord.
+	-	Le service se contente de récupérer les données via le client HTTP simulé et de les retourner.
+
+--- 
+
+### 2. `testGetCourseById_retourneCoursQuandTrouve`
+
+- **Cas d’utilisation lié :**
+  CU *Voir les détails d’un cours* (`getCourseById`)
+
+- **Arguments / contexte :**
+	- Le FakeHttpClientApi renvoie un cours avec :
+	- ID : `IFT2035`
+	- Crédits : `3.0`
+	- Texte de prérequis : `"Préalable : IFT1025"`
+	- Appel de la méthode :`getCourseById("IFT2035")`
+
+- **Résultat attendu :**
+  - Le résultat retourné est un Optional présent.
+	- L’ID du cours est IFT2035.
+	- Le nombre de crédits est 3.0.
+	- Le texte des prérequis correspond à celui fourni par l’API simulée.
+
+- **Effets de bord attendus :**
+	- Aucun effet de bord.
+	- Le service agit en lecture seule et ne modifie aucune donnée persistante.
+
+---
+
+### 3. `testCheckEligibility_etudiantEligibleQuandTousPrerequisOK`
+
+- **Cas d’utilisation lié :**
+  CU *Évaluer l’éligibilité d’un étudiant à un cours* (`checkEligibility`)
+
+- **Arguments / contexte :**
+	- Le FakeHttpClientApi renvoie un cours avec les prérequis suivants : `["IFT1025", "IFT1015"]`
+	- Liste des cours complétés par l’étudiant : `["IFT1025", "IFT1015"]`
+	- Appel de la méthode : `checkEligibility("IFT2035", completedCourses)`
+
+- **Résultat attendu :**
+  - `result.isEligible()` retourne true.
+	- La liste des prérequis manquants est vide.
+
+- **Effets de bord attendus :**
+	- Aucun effet de bord.
+	- Le test valide uniquement la logique métier de comparaison des prérequis.
+
+---
+
+### 4. `testCompareCourses_ignoreIdsInvalides`
+
+- **Cas d’utilisation lié :**
+  CU *Comparer des cours* `(compareCourses)`
+
+- **Arguments / contexte :**
+	- Le FakeHttpClientApi est configuré pour renvoyer un seul cours valide :
+		- `IFT1015 – Programmation 1`
+	- Liste d’IDs fournie au service :
+	  - `"   "` (chaîne vide)
+	  - `null`
+	  - `"IFT1015"` (ID valide)
+
+- **Résultat attendu :**
+  - La liste retournée n’est pas nulle.
+	-	La liste contient exactement 1 cours.
+	-	Le cours retourné a l’ID `IFT1015`.
+
+- **Effets de bord attendus :**
+	- Aucun effet de bord.
+	- Les IDs invalides sont ignorés avant l’appel à l’API simulée.
+
+---
+
+### 5. `testCreateSet_ensembleValide`
+
+- **Cas d’utilisation lié :**
+  CU *Créer un ensemble de cours* `(createSet)`
+
+- **Arguments / contexte :**
+	- Trimestre fourni : `"H25"`
+	- Liste de cours :
+	  - `["IFT1015", "IFT2255", "IFT2015"]`
+	- Appel de la méthode : `createSet("H25", courseIds)`
+
+- **Résultat attendu :**
+  - Le résultat retourné est un Optional présent.
+	-	L’ensemble contient exactement 3 cours.
+	-	Le trimestre est correctement assigné.
+	-	Un identifiant unique d’ensemble est généré.
+
+- **Effets de bord attendus :**
+	- L’ensemble est stocké en mémoire dans le service.
+	-	Aucun accès à des ressources externes.
+
+--- 
+
+### 6. ` testAddReview_avisValide`
+
+- **Cas d’utilisation lié :**
+  CU *Soumettre un avis étudiant* `(addReview)`
+
+- **Arguments / contexte :**
+	- Avis soumis :
+	  - Course ID : `IFT2255`
+	  - Difficulté :`4`
+	  - Charge de travail : `3`
+	  -	Commentaire : `"Cours intéressant"`
+	- Le fichier de stockage JSON est vide au départ.
+
+- **Résultat attendu :**
+  - La méthode `addReview` retourne true.
+	-	Un avis est présent dans la liste retournée par `getReviewsForCourse("IFT2255")`.
+
+- **Effets de bord attendus :**
+	- Écriture d’un nouvel avis dans le fichier JSON de stockage.
+	-	Aucune modification d’autres avis existants.
+
+---
+
+## Critères d'évaluation (Pour devoir 3)
+
+- **Résumé qualitatif :**
+  - Les tests unitaires réalisés pour le devoir 3 confirment que :
+	  -	la recherche de cours retourne correctement les listes correspondant aux critères fournis, y compris lorsque l’API renvoie une liste vide ;
+	  - la consultation des détails d’un cours gère correctement les cas où le cours existe, n’existe pas ou lorsque l’ID est invalide ;
+	  - la vérification de l’éligibilité applique correctement les règles de prérequis et distingue les cas éligibles et non éligibles ;
+	  -	la comparaison de cours ignore les identifiants invalides et reste robuste face aux erreurs simulées de l’API ;
+	  -	la création d’ensembles de cours respecte les contraintes métier (trimestre valide, nombre maximal de cours, sigles valides) ;
+	  -	la gestion des avis étudiants valide les entrées, stocke correctement les avis et calcule les agrégats (moyennes et nombre d’avis).
+
+- **Résumé quantitatif :**
+	- Nombre total de tests unitaires JUnit :
+	  - CourseServiceTest
+	  - CourseSetServiceTest
+	  -	ReviewServiceTest
+	  -	UserServiceTest
+	  -	Les tests couvrent plus de 6 fonctionnalités distinctes, incluant :
+	  -	recherche,
+	  -	détails,
+	  -	éligibilité,
+	  -	comparaison,
+	  -	ensembles de cours,
+	  -	avis étudiants.
+  -	Tous les tests passent avec succès :
+    - Tests run: XX, Failures: 0, Errors: 0
+
+---
+
+## Évaluation du système (Pour devoir 3)
+
+- **Qualité globale :**
+  - Le backend couvre l’ensemble des fonctionnalités requises pour le devoir 3 :
+	  -	logique métier enrichie (éligibilité, ensembles de cours, avis),
+	  -	séparation claire entre services, contrôleurs et modèles.
+	  -	L’architecture modulaire facilite l’ajout de nouvelles fonctionnalités sans impact majeur sur les composants existants.
+
+- **Facilité d’utilisation :**
+  - L’API REST expose des endpoints clairs et cohérents :
+		- /courses
+	  - /courses/{id}
+	  -	/courses/{id}/eligibility
+	  -	/course-sets
+	  -	/reviews
+	- La CLI permet de tester les scénarios principaux sans interface graphique, ce qui facilite la validation fonctionnelle.
+
+- **Performance :**
+  - Le système est robuste face aux entrées invalides et aux erreurs simulées de services externes.
+	-	Les appels externes sont centralisés et simulés dans les tests, ce qui améliore la testabilité et la stabilité globale du système.
+
+---
