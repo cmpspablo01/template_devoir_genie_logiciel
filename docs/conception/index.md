@@ -9,9 +9,9 @@ Cette section explique les choix faits pour construire le système.
 ## Approche utilisée
 
 Nous avons choisi une **architecture client-serveur** :  
-- **Frontend (interface web)** : ce que l’étudiant voit et utilise (recherche de cours, comparaison, avis).  
+- **Frontend (CLI)** : ce que l’étudiant voit et utilise (recherche de cours, comparaison, avis).  
 - **Backend (API REST)** : gère la logique (règles, calculs, agrégation des données).  
-- **Base de données** : garde les informations (résultats académiques, profils étudiants, avis).  
+- **Source de données** : garde les informations (résultats académiques, avis).  
 
 Ce modèle ressemble au **MVC** :  
 - Vue = l’interface,  
@@ -22,7 +22,7 @@ Ce modèle ressemble au **MVC** :
 
 - **Techniques** :  
   - Hébergement sur un serveur web simple.  
-  - Base de données relationnelle (PostgreSQL) ou NoSQL  
+  - Source de données relationnelle.  
   - Utilisation des formats standards comme JSON pour l'API et CSV pour les résultats.  
 
 - **Exigences** :  
